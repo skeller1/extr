@@ -11,7 +11,7 @@ module Extr
     end
 
     module ClassMethods
-      def acts_as_direct(*direct_methods={})
+      def acts_as_direct(direct_methods={})
         Config.model_config[self.to_s].clear
         direct_methods.stringify_keys!.merge!(DEFAULT_METHODS).each do |mtd, mcfg|
           if mcfg.is_a?(Hash)
