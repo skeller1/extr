@@ -1,8 +1,8 @@
 Extr::Engine.routes.draw do
 
-  #constraints(ActiveDirect::AllowedControllers) do
-    match ':controller-:action/:format'
-  #end
+end
 
+Rails.application.routes.draw do
+  match ':controller-:action/:format'
 end
 

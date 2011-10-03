@@ -1,6 +1,23 @@
 class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
+
+
+
+  include Extr::DirectController
+
+  skip_before_filter :verify_authenticity_token
+
+  direct  "TYPO3_Service_ExtDirect_V1_Controller_NodeController",
+    :getChildNodesForTree => 2,
+    :getChildNodes => 1
+
+
+  def getChildNodes
+    render :json => {:name => "David#{Random.rand(11)}"}.to_json
+  end
+
+
   def index
     @projects = Project.all
 
@@ -81,3 +98,4 @@ class ProjectsController < ApplicationController
     end
   end
 end
+

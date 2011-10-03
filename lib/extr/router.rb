@@ -121,18 +121,20 @@ module Extr
       request_env["PATH_INFO"] = "#{controller_path}-#{method}/json"
       request_env["REQUEST_URI"] = "#{controller_path}-#{method}/json"
 
+      request_env["PATH_INFO"]
+      request_env["REQUEST_URI"]
 
 
       #status,headers,response=controller.constantize.action(method).call(controller_request)
 
-      #begin
-       status,headers,response=@app.call(request_env)
+      begin
+
+      status,headers,response=@app.call(request_env)
        result['result'] = response ? response.body : ""
        result['result'] = ActiveSupport::JSON.decode(result['result'])
-      #rescue
-      #  result['result'] = "nix da"
-      #end
-
+      rescue
+       result['result'] = "nix da"
+      end
 
       result
     rescue => e
