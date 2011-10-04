@@ -114,7 +114,6 @@ module Extr
       begin
 
        status,headers,response=@app.call(request_env)
-       p response
        result['result'] = response ? response.body : ""
        result['result'] = ActiveSupport::JSON.decode(result['result'])
 
