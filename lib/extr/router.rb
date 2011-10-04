@@ -101,50 +101,35 @@ module Extr
         'result' => ""
       }
 
-
-      request_env = @env.dup
-      #controller_request['REQUEST_METHOD']="GET"
-      #controller_request["action_dispatch.request.format"]="application/json"
-
-      #request_env["PATH_INFO"] = "/projects/getStatus/json"
-      #request_env["REQUEST_URI"] = "/projects/getStatus/json"
-      #begin
-      # status,headers,response=@app.call(request_env)
-      # result['result'] = response ? response.body : ""
-      #rescue
-      #  result['result'] = "nix da"
-      #end
-      ##@app
-
       controller_path = Config.get_controller_path(action)
 
-      request_env["PATH_INFO"] = "#{controller_path}-#{method}/json"
-      request_env["REQUEST_URI"] = "#{controller_path}-#{method}/json"
 
-      request_env["PATH_INFO"]
-      request_env["REQUEST_URI"]
+      request_env = @env.dup
 
+      request_env["PATH_INFO"] = "extr/#{controller_path}-#{method}/json"
+      request_env["REQUEST_URI"] = "extr/#{controller_path}-#{method}/json"
 
       #status,headers,response=controller.constantize.action(method).call(controller_request)
 
       begin
 
-      status,headers,response=@app.call(request_env)
+       status,headers,response=@app.call(request_env)
+       p response
        result['result'] = response ? response.body : ""
        result['result'] = ActiveSupport::JSON.decode(result['result'])
-      rescue
-       result['result'] = "nix da"
-      end
 
-      result
-    rescue => e
-      if Rails.env.development?
+       result
+      rescue => e
+       if Rails.env.development?
         Rails.logger.error result['type'] = 'exception'
         Rails.logger.error result['message'] = e.message
         Rails.logger.error result['where'] = e.backtrace.join("\n")
+        result["result"] = ""
+       else
+        result["result"] = {}
+       end
+       result
       end
-    ensure
-      result
     end
 
     private

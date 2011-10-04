@@ -4,7 +4,7 @@ module Extr
   require 'extr/direct_controller'
   #load model method
   require 'extr/acts_as_direct'
-
+  require 'extr/allowed_controllers'
 end
 
 require "extr/engine"

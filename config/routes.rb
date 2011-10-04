@@ -3,6 +3,6 @@ Extr::Engine.routes.draw do
 end
 
 Rails.application.routes.draw do
-  match ':controller-:action/:format'
+    match 'extr/:controller-:action/:format', :via => :post, :constraints => Extr::AllowedControllers
 end
 

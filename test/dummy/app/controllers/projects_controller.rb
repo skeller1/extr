@@ -1,20 +1,24 @@
+#module Bla
 class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
 
 
+  protect_from_forgery
 
   include Extr::DirectController
 
-  skip_before_filter :verify_authenticity_token
 
-  direct  "TYPO3_Service_ExtDirect_V1_Controller_NodeController",
-    :getChildNodesForTree => 2,
+
+  #skip_before_filter :verify_authenticity_token
+
+  direct "MyDirectController",
+    :getChildProject => 1,
     :getChildNodes => 1
 
 
-  def getChildNodes
-    render :json => {:name => "David#{Random.rand(11)}"}.to_json
+  def getChildProject
+    render :json => {:name => "Project#{Random.rand(11)}"}.to_json
   end
 
 
@@ -98,4 +102,6 @@ class ProjectsController < ApplicationController
     end
   end
 end
+
+#end
 
