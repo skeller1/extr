@@ -8,7 +8,7 @@ module Extr
 
     module ClassMethods
 
-      def direct(name=false, direct_methods={})
+      def direct(direct_methods={}, name=false)
         if name
           Config.controller_path[name]=self.controller_path
         else
