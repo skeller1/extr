@@ -1,7 +1,8 @@
 module Extr
   class Config
 
-    ROUTER_PATH = '/direct_router'.freeze
+
+    ROUTER_PATH = '/extr/direct_router'.freeze
 
     cattr_accessor :model_config
     cattr_accessor :controller_config
@@ -17,6 +18,13 @@ module Extr
 
       def controller_path
         @@controller_path ||= {}
+      end
+
+      def allowed_model?()
+        
+      end
+
+      def allowed_controller?()
       end
 
       def has_model?(action)

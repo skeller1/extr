@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
 
   include Extr::DirectController
 
-  #direct :makeone => 1, :maketwo => 2
+  direct({:makeone => 1, :maketwo => 2})
 
 end
 

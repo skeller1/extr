@@ -11,6 +11,7 @@ module Extr
     end
 
     module ClassMethods
+      #todo implement name option for acts_as_direct
       def acts_as_direct(direct_methods={})
         Config.model_config[self.to_s].clear
         direct_methods.stringify_keys!.merge!(DEFAULT_METHODS).each do |mtd, mcfg|
