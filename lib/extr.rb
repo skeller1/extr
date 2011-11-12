@@ -1,13 +1,12 @@
 module Extr
-  require 'extr/config'
-  require 'extr/request/json_request'
-  #require 'extr/request/form_request'
-  require 'extr/transaction'
-  require 'extr/router'
-  require 'extr/direct_controller'
-  #load model method
-  require 'extr/acts_as_direct'
-  require 'extr/allowed_controllers'
+ autoload "Config", 			'extr/config'
+ autoload "ExtDirectJsonRequest",	'extr/request/json_request'
+ autoload "Transaction",			'extr/transaction'
+ autoload "Router", 			'extr/router'
+ autoload "AllowedControllers",		'extr/allowed_controllers'
+ 
+ require 'extr/direct_controller'
+ require 'extr/acts_as_direct'
 end
 
 require "extr/engine"

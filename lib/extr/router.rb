@@ -18,7 +18,7 @@ module Extr
   end
 
   def call(env)
-   Rails.logger.error @env = env
+   @env = env
    if ext_direct_request? 
     body = []  
     if form_data?
