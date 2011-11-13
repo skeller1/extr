@@ -46,7 +46,20 @@ HERE
     }
     api="REMOTING_API = #{config.to_json}"
 
-    javascript_tag "Ext.Direct.addProvider(#{api});"
+    forgery = "(function() {
+  var originalGetCallData = Ext.direct.RemotingProvider.prototype.getCallData;
+  Ext.override(Ext.direct.RemotingProvider, {
+   getCallData: function(t) {
+    var defaults = originalGetCallData.apply(this, arguments);
+    return Ext.apply(defaults, {
+     authenticity_token: '#{form_authenticity_token}'
+    });
+   }
+  })
+  })();"
+
+
+    javascript_tag forgery+"Ext.Direct.addProvider(#{api});"
 
     #rescue
     #  javascript_tag "alert('Something went wrong');"

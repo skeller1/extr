@@ -1,7 +1,7 @@
 module Extr
 
  class ExtDirectJsonRequest < Rack::Request
- 	
+
   def transactions
    @transactions ||= collect_transactions
   end
@@ -16,6 +16,7 @@ module Extr
      t = Transaction.new(self, req['action'], req['method'], req['data'], req['tid'])
      arr << t if t.valid?
     end
+    arr
    rescue => ex
     Rails.logger.error ex.message
     Rails.logger.error ex.backtrace
@@ -36,3 +37,4 @@ module Extr
  end
 
 end
+
