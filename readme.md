@@ -73,7 +73,7 @@ Ready to start
          </body>
         </html>
 
-    -   __ext_base_tag__: Generates a HTML base tag with the current host (<base href="http://mydomain:portnumber" />)
+    -   __ext_base_tag__: Generates a HTML base tag with the current host and port number)
     -   __ext__: Generates all necessary JS and CSS files for Ext Js
     -   __ext_direct_provider "Rails"__: Generates the Ext.Direct API Remote Provider Configuration with the namespace `Rails`
 
