@@ -119,9 +119,9 @@ Ready to start
 
 4. __Call controller actions on the client side__
 
-    Create a Rails route to your new view that is a startpoint for your new Ext Js UI. Make sure that you load it with your `application.html.erb` layout file, that includes all necessary Ext Js stuff.
+    Create a Rails route to your new view that is a startpoint for your new Ext Js UI. Make sure that you load it with your `application.html.erb` layout file, that includes all the Ext Js stuff.
 
-    In your loaded JS or in Firebug (Javascript console) you can call your ProjectsController actions
+    In your written JS files or in Firebug (Javascript console) you can use your ProjectsController actions:
 
         Rails.ProjectsController.get_child_project(current_project,function(result,e){
          alert(result);
@@ -129,7 +129,7 @@ Ready to start
 
 
 
-
+    Executing this script many times only results in one Rails request to the implemented Ext Js Direct Router.
 
 ## Features
 
