@@ -90,6 +90,8 @@ Ready to start
 
         end
 
+    If you want to prepare all Rails controllers being directable, you have to include the module in Rails ApplicationController.
+
 
 3.  __Register your directable controller actions__
 
