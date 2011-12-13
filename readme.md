@@ -12,9 +12,9 @@ ExtR is an Rails 3.1.x compatible implementation of the [Ext.Direct API specific
 
 
 
-## Functionality and benefit
+## Intension
 
-The Ext.Direct API allows you to call serverside methods (Ruby, Rails) within the client side (Javascript). This makes the development of complex UI's' more efficient and easier.
+The Ext.Direct API allows you to call serverside methods within the client side (Javascript). This makes the development of complex UI's' more efficient and easier. Have a look:
 
 
 Normal Ajax call with JQuery
@@ -50,14 +50,14 @@ Next run
 
     bundle install
 
+Ready to start
 
 
 ## Usage
 
-1.  __Include JS and CSS for Sencha Ext Js available__
+1.  __Prepare Ext JS dependencies__
 
-
-    Simple integration using the extr helper methods in example layout file `application.html.erb`
+    Simple integration of the necessary JS and CSS files using the ExtR helper methods in `application.html.erb`
 
         <!DOCTYPE html>
         <html>
@@ -75,9 +75,9 @@ Next run
 
 
 
-2.  __Make your controller directable by including Extr::DirectController__
+2.  __Make controller directable__
 
-    Simple including of that modul at the top of your controller `projects_controller.rb`
+    Simple including of the `Extr::DirectController modul` at the top of your controller `projects_controller.rb`
 
         class ProjectsController < ApplicationController
 
