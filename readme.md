@@ -73,9 +73,12 @@ Ready to start
          </body>
         </html>
 
-    *   ext_base_tag
-
-        > Renders a HTML base tag with the current host
+    -   ext_base_tag
+        > Generates a HTML base tag with the current host
+    -   ext
+        > Generates all necessary JS and CSS files for using
+    -   ext_direct_provider "Rails"
+        > Generates the Ext.Direct API Remote Provider Configuration
 
 
 2.  __Make controller directable__
