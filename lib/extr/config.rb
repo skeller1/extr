@@ -21,7 +21,7 @@ module Extr
       end
 
       def allowed_model?()
-        
+
       end
 
       def allowed_controller?()

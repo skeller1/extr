@@ -12,7 +12,7 @@ class ProjectsController < ApplicationController
 
   #skip_before_filter :verify_authenticity_token
 
-  direct({:getChildProject => 1, :getChildNodes => 1})
+  direct({:getChildProject => 1, :getChildNodes => 1}, "Mike")
 
 
   def getChildProject

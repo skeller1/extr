@@ -6,6 +6,10 @@ module Extr
    @transactions ||= collect_transactions
   end
 
+  def ext_params(n)
+   raw_http_params(n)
+  end
+
 
   private
 
