@@ -57,7 +57,7 @@ Ready to start
 
 1.  __Prepare Ext JS dependencies__
 
-    Simple integration of the necessary JS and CSS files using the ExtR helper methods in `application.html.erb`
+    Simple integration of the necessary JS and CSS files using the ExtR helper methods in your layout file (`application.html.erb`)
 
         <!DOCTYPE html>
         <html>
@@ -73,11 +73,14 @@ Ready to start
          </body>
         </html>
 
+    *   ext_base_tag
+
+        > Renders a HTML base tag with the current host
 
 
 2.  __Make controller directable__
 
-    Simple including of the `Extr::DirectController modul` at the top of your controller `projects_controller.rb`
+    Simple including of the `Extr::DirectController` modul at the top of your controller(`projects_controller.rb`)
 
         class ProjectsController < ApplicationController
 
