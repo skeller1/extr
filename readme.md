@@ -117,7 +117,7 @@ Ready to start
     The numbers behind the method names specifies the amount of params that can passed in Javascript before the callback
 
 
-4. __Start Ext Direct call__
+4. __Call controller actions on the client side__
 
     Create a Rails route to your new view that is a startpoint for your new Ext Js UI. Make sure that you load it with your `application.html.erb` layout file, that includes all necessary Ext Js stuff.
 
