@@ -112,7 +112,21 @@ Ready to start
         end
 
 
-    The number 3 and 1 specifies the amount of params that can passed in Javascript
+    The numbers behind the method names specifies the amount of params that can passed in Javascript before the callback
+
+
+4. __Start Ext Direct call__
+
+    Create a Rails route to your new view that is a startpoint for your new Ext Js UI. Make sure that you load it with your `application.html.erb` layout file, that includes all necessary Ext Js stuff.
+
+    In your loaded JS or in Firebug (Javascript console) you can call your ProjectsController actions
+
+        Rails.ProjectsController.get_child_project(current_project,function(result,e){
+         alert(result);
+        })
+
+
+
 
 
 ## Features
