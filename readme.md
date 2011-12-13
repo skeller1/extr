@@ -1,4 +1,4 @@
-# ExtR
+# __ExtR__
 
 
 __UNDER DEVELOPMENT!!!!! first stable release in begin of January 2012__
@@ -32,21 +32,22 @@ Next run
 1.  __Include JS and CSS for Sencha Ext Js available__
 
 
-Simple integration using the extr helper methods in layout file `application.html.erb`
+    Simple integration using the extr helper methods in example layout file `application.html.erb`
 
-    <!DOCTYPE html>
-    <html>
-     <head>
-      <title>Extr</title>
-      <%= csrf_meta_tags %>
-      <%= ext_base_tag %>
-      <%= ext %>
-      <%= ext_direct_provider "Rails" %>
-     </head>
-     <body>
-      <%= yield %>
-     </body>
-    </html>
+        <!DOCTYPE html>
+        <html>
+         <head>
+          <title>Extr</title>
+          <%= csrf_meta_tags %>
+          <%= ext_base_tag %>
+          <%= ext %>
+          <%= ext_direct_provider "Rails" %>
+         </head>
+         <body>
+          <%= yield %>
+         </body>
+        </html>
+
 
 
 2.  Make your controller directable by including Extr::DirectController
