@@ -55,7 +55,7 @@ Ready to start
 
 ## Usage
 
-__1.    Prepare Ext JS dependencies__
+1.  __Prepare Ext JS dependencies__
 
     Simple integration of the necessary JS and CSS files using the ExtR helper methods in your layout file (`application.html.erb`)
 
