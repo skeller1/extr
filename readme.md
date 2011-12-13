@@ -1,8 +1,7 @@
 # ExtR
 
 
-__UNDER DEVELOPMENT!!!!! first stable release in begin of January 2012git://github.com/skeller1/extr.git__
-
+__UNDER DEVELOPMENT!!!!! first stable release in begin of January 2012__
 
 __An open source Ruby on Rails 3.1.x engine for using ExtDirect in Rails Applications.__
 
@@ -32,18 +31,21 @@ Next run
 
 1.  Make JS und CSS for Sencha Ext Js available
 
+
+Simple integration using the extr helper methods in layout file `application.html.erb`
+
     <!DOCTYPE html>
     <html>
-        <head>
-            <title>Extr</title>
-            <%= csrf_meta_tags %>
-            <%= ext_base_tag %>
-            <%= ext %>
-            <%= ext_direct_provider "Rails" %>
-        </head>
-        <body>
-            <%= yield %>
-        </body>
+     <head>
+      <title>Extr</title>
+      <%= csrf_meta_tags %>
+      <%= ext_base_tag %>
+      <%= ext %>
+      <%= ext_direct_provider "Rails" %>
+     </head>
+     <body>
+      <%= yield %>
+     </body>
     </html>
 
 
