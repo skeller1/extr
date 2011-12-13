@@ -7,7 +7,32 @@ __An open source Ruby on Rails 3.1.x engine for using ExtDirect in Rails Applica
 
 ExtR is an Rails 3.1.x compatible implementation of the [Ext.Direct API specification](http://bla.de) from the famous [Sencha Ext Js Framework](http://www.sencha.com/). If you want to write UI's with the power of Ruby have a look at [Netzke](http://netzke.org/), the brilliant Sencha Ext JS and Ruby on Rails component framework.
 
-The Ext.Direct API allows you to call serverside methods from the client side. This makes the development of complex UI's' easier and more efficient.
+
+
+
+
+
+## Functionality and benefit
+
+The Ext.Direct API allows you to call serverside methods (Ruby, Rails) from the client side (Javascript). This makes the development of complex UI's' more efficient and easier.
+
+
+Normal Ajax call with JQuery
+
+    $.ajax({
+     url: "projects",
+     context: document.body,
+     success: function(){
+      alert("Got all projects");
+     }
+    });
+
+
+Ext Js call with Ext.Direct API
+
+    Rails.Projets.all(function(r,e){
+        alert("Got all projects");
+    })
 
 
 ## Requirements
