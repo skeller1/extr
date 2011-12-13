@@ -80,7 +80,7 @@ Ready to start
 
 2.  __Make controller directable__
 
-    Simple including of the `Extr::DirectController` modul at the top of your controller(`projects_controller.rb`)
+    Simple including of the `Extr::DirectController` modul at the top of your controller (`projects_controller.rb`)
 
         class ProjectsController < ApplicationController
 
