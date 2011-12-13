@@ -5,7 +5,7 @@ __UNDER DEVELOPMENT!!!!! first stable release in begin of January 2012__
 
 __An open source Ruby on Rails 3.1.x engine for using ExtDirect in Rails Applications.__
 
-ExtR is an Rails 3.1.x compatible implementation of the [Ext.Direct API specification](http://bla.de) from the famous [Sencha Ext Js Framework](http://www.sencha.com/). If you want to write UI's with the power of Ruby have a look at [Netzke](http://netzke.org/), the brilliant Sencha Ext JS and Ruby on Rails component framework.
+ExtR is an Rails 3.1.x compatible implementation of the [Ext.Direct API specification](http://bla.de) from the famous [Sencha Ext Js Framework](http://www.sencha.com/). If you want to write Ext Js UI's with the power of Ruby have a look at [Netzke](http://netzke.org/), the brilliant Sencha Ext JS and Ruby on Rails component framework.
 
 
 
@@ -78,7 +78,7 @@ Ready to start
     -   ext
         > Generates all necessary JS and CSS files for using
     -   ext_direct_provider "Rails"
-        > Generates the Ext.Direct API Remote Provider Configuration
+        > Generates the Ext.Direct API Remote Provider Configuration with the namespace `Rails`
 
 
 2.  __Make controller directable__
