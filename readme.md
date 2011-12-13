@@ -50,74 +50,41 @@ Next run
 
 
 
-2.  Make your controller directable by including Extr::DirectController
+2.  __Make your controller directable by including Extr::DirectController__
 
-    class ProjectsController < ApplicationController
+    Simple including of that modul at the top of your controller `projects_controller.rb`
 
-     include Extr::DirectController
+        class ProjectsController < ApplicationController
 
-     #...
+         include Extr::DirectController
 
-    end
+         #...
 
-
-3.  Use the direct class method to register the directable controller actions
-
-
-    class ProjectsController < ApplicationController
-
-     include Extr::DirectController
-
-     direct {:get_child_project => 3, :get_parent_project => 1}
+        end
 
 
+3.  __Register your directable controller actions__
 
-     def get_child_project
-      #...
-     end
+    Use the direct class method to register the directable controller actions
 
-     def get_parent_project
-      #...
-     end
+        class ProjectsController < ApplicationController
 
-    end
+         include Extr::DirectController
 
+         direct {:get_child_project => 3, :get_parent_project => 1}
 
-    The number 3 and 1 specifies the amount of params that can passed
+         def get_child_project
+          #...
+         end
 
+         def get_parent_project
+          #...
+         end
 
-  #skip_before_filter :verify_authenticity_token
-
-  direct({:getChildProject => 1, :getChildNodes => 1}, "Mike")
-
-
-  def getChildProject
-    render :json => {:name => "Project#{Random.rand(11)}"}.to_json
-  end
+        end
 
 
-  def index
-    @projects = Project.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @projects }
-    end
-  end
-
-
-If you get an error like
-
-    uninitialized constant Refinery::Pages::Tab
-
-It means your Refinery version isn't new enough. To fix that you need to update the Refinery CMS `Gemfile` line to this
-
-    gem 'refinerycms', '~> 0.9.9'
-
-Then run:
-
-    bundle install
-    rake refinery:update
+    The number 3 and 1 specifies the amount of params that can passed in Javascript
 
 
 ## Features
