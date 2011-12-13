@@ -74,8 +74,8 @@ Ready to start
         </html>
 
     -   __ext_base_tag__: Generates a HTML base tag with the current host (<base href="http://mydomain:portnumber" />)
-    -   ext: Generates all necessary JS and CSS files for Ext Js
-    -   ext_direct_provider "Rails": Generates the Ext.Direct API Remote Provider Configuration with the namespace `Rails`
+    -   __ext__: Generates all necessary JS and CSS files for Ext Js
+    -   __ext_direct_provider "Rails"__: Generates the Ext.Direct API Remote Provider Configuration with the namespace `Rails`
 
 
 2.  __Make controller directable__
