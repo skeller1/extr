@@ -12,7 +12,7 @@ The Ext.Direct API allows you to call serverside methods from the client side. T
 
 ## Requirements
 
-* [Rails 3.1.x](http://github.com/rails/rails
+* [Rails 3.1.x](http://github.com/rails/rails)
 
 
 ## Install
@@ -29,7 +29,7 @@ Next run
 
 ## Usage
 
-1.  Make JS und CSS for Sencha Ext Js available
+1.  __Include JS and CSS for Sencha Ext Js available__
 
 
 Simple integration using the extr helper methods in layout file `application.html.erb`
