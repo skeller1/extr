@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.version     = Extr::VERSION
   s.authors     = ["Stephan Keller"]
   s.email       = ["MiStK@gmx.de"]
-  s.homepage    = ""
+  s.homepage    = "http://github.com/skeller1/extr/"
   s.summary     = "Extr is a Ext Direct Implementation for Rails 3.1"
   s.description = "Extr is a Rails 3.1 Ext Direct Router implemented as Rack Middleware with View Helpers and some adjustment abilities."
 
@@ -21,6 +21,7 @@ Gem::Specification.new do |s|
   # s.add_dependency "jquery-rails"
 
   s.add_development_dependency "sqlite3"
-
+  #s.add_development_dependency 'test-spec', '>= 0.9.0'
+  #s.add_development_dependency 'json', '>= 1.1'
 end
 

@@ -9,6 +9,7 @@ class ProjectsController < ApplicationController
   include Extr::DirectController
 
 
+  respond_to :ext
 
   #skip_before_filter :verify_authenticity_token
 
@@ -16,8 +17,14 @@ class ProjectsController < ApplicationController
 
 
   def getChildProject
-    render :json => {:name => "Project#{Random.rand(11)}"}.to_json
+   @project = {:name => "Project #{Random.rand(11)}"}
+   respond_with @project
   end
+
+  #def getChildProject
+  #  @project = {:name => "Project #{Random.rand(11)}"}
+  #  respond_with @project
+  #end
 
 
   def index

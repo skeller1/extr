@@ -1,0 +1,2 @@
+module Extr::RouterHelper
+end

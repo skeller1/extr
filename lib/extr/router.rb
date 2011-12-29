@@ -36,6 +36,7 @@ module Extr
     end
     [200, { "Content-Type" => "application/json"}, ["#{body.to_json}"]]
    else
+    p "wrong"
     @app.call(env)
    end
   end

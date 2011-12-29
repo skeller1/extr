@@ -1,8 +1,10 @@
 Extr::Engine.routes.draw do
-
-end
+ end
 
 Rails.application.routes.draw do
-    #match 'extr/:controller-:action/:format', :via => :post, :constraints => Extr::AllowedControllers
+   match "#{Extr::Config::ROUTER_PATH}" => "extr/router#direct",
+   :format => false,
+   :defaults => { :format => :ext },
+   :via => :post
 end
 

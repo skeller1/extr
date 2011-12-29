@@ -11,8 +11,6 @@ module Extr
     begin
      action ||= self.gsub(":","")
 
-     p action
-
      Config.controller_path[action]=self.to_s
 
      Config.controller_config[action].clear
