@@ -51,8 +51,9 @@ module Extr
 
    begin
     controller = Config.get_controller_path(self.action)
-    p body = controller.constantize.action(self.method).call(request.env).to_a.last.body
-    ext['result'] = ActiveSupport::JSON.decode(body) unless body.empty?
+    body = controller.constantize.action(self.method).call(request.env).to_a.last.body
+    ext['result'] = body unless body.empty?
+    #ext['result'] = ActiveSupport::JSON.decode(body) unless body.empty?
 
    rescue => e
     if Rails.env.development?
