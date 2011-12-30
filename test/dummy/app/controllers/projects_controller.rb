@@ -18,6 +18,7 @@ class ProjectsController < ApplicationController
 
   def getChildProject
    @project = {:name => "Project #{Random.rand(11)}"}
+   #render :json => @project
    respond_with @project
   end
 
