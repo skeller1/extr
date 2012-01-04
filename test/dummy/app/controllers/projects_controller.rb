@@ -1,4 +1,3 @@
-#module Bla
 class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
@@ -11,16 +10,27 @@ class ProjectsController < ApplicationController
 
   respond_to :ext
 
-  #skip_before_filter :verify_authenticity_token
-
-  direct({:getChildProject => 1, :getChildNodes => 1}, "Mike")
+  extdirect :name => "Mike", :methods => {:getChildProject => 1, :getChildNodes => 0}
 
 
   def getChildProject
+   #controllers with respond_to
+   #p direct_controllers = ActionController::Base.descendants.select{|klass| klass.mimes_for_respond_to.key?(:ext)}
+   #skell :ext, :method => {:getChildProject => 1, :index => 2}
+   #p self.mimes_for_respond_to
+   #p self.instance_methods(false)
+   #instance_methods(false)
+   #p self.mimes_for_respond_to.key?(:ext)
    @project = {:name => "Project #{Random.rand(11)}"}
    #render :json => @project
    respond_with @project
   end
+
+  def getChildNodes
+   @nodes = Project.all
+   render :json => @nodes
+  end
+
 
   #def getChildProject
   #  @project = {:name => "Project #{Random.rand(11)}"}
@@ -107,7 +117,6 @@ class ProjectsController < ApplicationController
       format.json { head :ok }
     end
   end
-end
 
-#end
+end
 

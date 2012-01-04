@@ -1,27 +1,38 @@
 module Extr
-
- class RouterController < ApplicationController
+ class RouterController < ActionController::Base
 
   def direct
-
-   if form_data?
-    r = ExtDirectFormRequest.new(env)
-    p "form post"
+   if request.form_data?
+    r = ExtDirectFormRequest.new(request.env)
     #todo implement form_posts
    else
-    p "json post"
-    r = ExtDirectJsonRequest.new(request.env)
-    body = r.transactions.map(&:response)
+    body = transactions.map(&:response)
    end
-   render :json => body
-
+   render :json => body ||= ""
   end
 
 
   private
 
-  def form_data?
-   request.env['rack.request.form_hash']
+  def transactions
+   @transactions ||= collect_transactions
+  end
+
+  def collect_transactions
+   arr = []
+   raw_http_params.each do |p|
+    t = Transaction.new(request, p[:action], p[:method], p[:data], p[:tid])
+    arr << t if t.valid?
+   end
+   return arr
+  end
+
+  def raw_http_params
+   parse request.env["action_dispatch.request.request_parameters"]
+  end
+
+  def parse(data)
+   return (data["_json"]) ? data["_json"] : [data]
   end
 
  end

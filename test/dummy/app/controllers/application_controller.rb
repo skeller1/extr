@@ -1,9 +1,13 @@
 class ApplicationController < ActionController::Base
+
   protect_from_forgery
 
   include Extr::DirectController
 
-  direct({:makeone => 1, :maketwo => 2})
+  def makeone
+   @time = {:month => "Data was #{params[:data].class} on #{Time.now}"}
+   render :json => @time
+  end
 
 end
 

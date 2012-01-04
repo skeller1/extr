@@ -101,7 +101,7 @@ Ready to start
 
          include Extr::DirectController
 
-         direct {:get_child_project => 3, :get_parent_project => 1}
+         extdirect :methods => {:get_child_project => 3, :get_parent_project => 1}
 
          def get_child_project
           #...
@@ -117,7 +117,44 @@ Ready to start
     The numbers behind the method names specifies the amount of params that can passed in Javascript before the callback
 
 
-4. __Call controller actions on the client side__
+4. __Enable method rendering__
+
+    The Extr gem registers a new mime type in your rails app: (`:ext => application/ext`). With using `respond_to :ext` you can use the render :json method of rails or separate your answer in your own view:
+
+        class ProjectsController < ApplicationController
+
+         include Extr::DirectController
+
+         extdirect :methods => {:get_child_project => 3, :get_parent_project => 1}
+
+         respond_to :ext
+
+
+         def get_child_project
+          @data = ...
+          render :json => @data
+         end
+
+         def get_parent_project
+          @data = ...
+          respond_with @data
+         end
+
+        end
+
+
+       `respond_with` needs an own view `get_parent_project`. Don't forget to escape your json  response in the view.
+
+       #get_parent_project
+
+       <%= @data.to_json.html_safe %>
+
+
+
+
+
+
+5. __Call controller actions on the client side__
 
     Create a Rails route to your new view that is a startpoint for your new Ext Js UI. Make sure that you load it with your `application.html.erb` layout file, that includes all the Ext Js stuff.
 

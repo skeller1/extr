@@ -29,18 +29,26 @@ module Extr
    @model_transaction
   end
 
+  private
+
   def invoke_model_method
-   p "invoke model"
-   unless self.data.nil?
-    return_val = self.action.constantize.send(self.method)
-    #return_val = action.constantize.send(method, *normalize_params_for(action,parameters))
-   else
-    return_val = self.action.constantize.send(self.method)
-   end
+   #unless self.data.nil?
+   # return_val = self.action.constantize.send(self.method)
+   # #return_val = action.constantize.send(method, *normalize_params_for(action,parameters))
+   #else
+   # return_val = self.action.constantize.send(self.method)
+   #end
+   ext = {
+    'type'    => 'rpc',
+    'tid'     => self.tid,
+    'action'  => self.action,
+    'method'  => self.method,
+    'result'  => self.action.constantize.send(self.method)
+   }
+
   end
 
   def invoke_controller_method
-
    ext = {
     'type'    => 'rpc',
     'tid'     => self.tid,
@@ -51,8 +59,15 @@ module Extr
 
    begin
     controller = Config.get_controller_path(self.action)
-    body = controller.constantize.action(self.method).call(request.env).to_a.last.body
-    #ext['result'] = body unless body.empty?
+    params = HashWithIndifferentAccess.new
+    params[:method] = self.method
+    params[:tid] = self.tid
+    params[:data] = self.data
+    params[controller.constantize.request_forgery_protection_token] = get_token(controller)
+    self.request.env["action_dispatch.request.request_parameters"] = nil
+    self.request.env["action_dispatch.request.parameters"] = params
+
+    body = controller.constantize.action(self.method).call(self.request.env).to_a.last.body
     ext['result'] = ActiveSupport::JSON.decode(body) unless body.empty?
 
    rescue => e
@@ -65,6 +80,10 @@ module Extr
     return ext
    end
 
+  end
+
+  def get_token(controller)
+   request.env["action_dispatch.request.parameters"][controller.constantize.request_forgery_protection_token] ||=   request.env["action_dispatch.request.parameters"][:_json].first[controller.constantize.request_forgery_protection_token]
   end
 
  end

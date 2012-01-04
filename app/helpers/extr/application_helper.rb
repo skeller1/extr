@@ -52,7 +52,7 @@ HERE
    getCallData: function(t) {
     var defaults = originalGetCallData.apply(this, arguments);
     return Ext.apply(defaults, {
-     authenticity_token: '#{form_authenticity_token}'
+     #{request_forgery_protection_token}: '#{form_authenticity_token}'
     });
    }
   })
