@@ -30,7 +30,7 @@ Normal Ajax call with JQuery
 
 Ext Js call with Ext.Direct API
 
-    Rails.Projets.all(function(r,e){
+    Rails.Projects.all(function(r,e){
         alert("Got all projects");
     })
 
