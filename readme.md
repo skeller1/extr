@@ -143,12 +143,12 @@ Ready to start
         end
 
 
-       The own mime type allows you json and ext request in the same controller (no using of json for the response, technically :ext and :json deliver the same format: :json ).
+       The own mime type allows you json and ext requests in the same controller (no using of json for the response, technically :ext and :json deliver the same format: :json ).
        Rendering with `respond_with` needs an own view `get_parent_project.ext.erb`. Don't forget to escape your json response in the view:
 
-       #get_parent_project.ext.erb
+        #get_parent_project.ext.erb
 
-       <%= @data.to_json.html_safe %>
+        <%= @data.to_json.html_safe %>
 
 
 
