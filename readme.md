@@ -180,7 +180,8 @@ Ready to start
 
 ## TODO
 
-* model directable
+* declaration of directable controller actions with xml and yaml in initializer file
+* json form post handling (upload files)
 
 ## License
 
