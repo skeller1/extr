@@ -119,7 +119,7 @@ Ready to start
 
 4. __Enable method rendering__
 
-    The Extr gem registers a new mime type in your rails app: (`:ext => application/ext`). With using `respond_to :ext` you can use the render :json method of rails or separate your answer in your own view:
+    The Extr gem registers a new mime type in your rails app: (`:ext => application/ext`). Using `respond_to :ext` allows you to create the response in 2 different ways:
 
         class ProjectsController < ApplicationController
 
@@ -143,9 +143,10 @@ Ready to start
         end
 
 
-       `respond_with` needs an own view `get_parent_project`. Don't forget to escape your json  response in the view.
+       The own mime type allows you json and ext request in the same controller (no using of json for the response, technically :ext and :json deliver the same format: :json ).
+       Rendering with `respond_with` needs an own view `get_parent_project.ext.erb`. Don't forget to escape your json response in the view:
 
-       #get_parent_project
+       #get_parent_project.ext.erb
 
        <%= @data.to_json.html_safe %>
 
@@ -175,11 +176,13 @@ Ready to start
 
 ### Make your models directable
 
-### Use different names for
+### Use different names for controller names
 
 ## TODO
 
-* make
+* model directable
 
 ## License
+
+    MIT-LICENSE
 
