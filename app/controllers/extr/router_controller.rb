@@ -2,8 +2,8 @@ module Extr
  class RouterController < ActionController::Base
 
   def direct
+   #debugger
    if request.form_data?
-    r = ExtDirectFormRequest.new(request.env)
     #todo implement form_posts
    else
     body = transactions.map(&:response)

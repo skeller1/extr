@@ -1,7 +1,7 @@
 module Extr
   module ActsAsDirect
     DEFAULT_METHODS = {'create' => 1, 'update' => 2, 'update_all' => 2, 'delete' => 1 , 'delete_all' => 1,
-      'exists' => 1 , 'find' => 1, 'find_every' => 1, 'first' => 0, 'last' => 0, 'all' => 1, 'count' => 0 }
+      'exists' => 1 , 'find' => 1, 'find_every' => 1, 'first' => 0, 'last' => 0, 'all' => 0, 'count' => 0 }
 
     def self.included(base)
       base.extend ClassMethods
@@ -12,9 +12,10 @@ module Extr
 
     module ClassMethods
       #todo implement name option for acts_as_direct
-      def acts_as_direct(direct_methods={})
+      def acts_as_direct(*methods)
+        options = methods.extract_options!
         Config.model_config[self.to_s].clear
-        direct_methods.stringify_keys!.merge!(DEFAULT_METHODS).each do |mtd, mcfg|
+        (options.delete(:methods) || {}).stringify_keys!.merge!(DEFAULT_METHODS).each do |mtd, mcfg|
           if mcfg.is_a?(Hash)
             Config.model_config[self.to_s] << {'name' => mtd}.merge!(mcfg)
           else

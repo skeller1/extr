@@ -8,12 +8,16 @@ class ProjectsController < ApplicationController
   include Extr::DirectController
 
 
-  respond_to :ext
+  respond_to :json#, :ext
 
-  extdirect :name => "Mike", :methods => {:getChildProject => 1, :getChildNodes => 0}
+  #respond_to :ext
+
+  extdirect :name => "Mike", :methods => {:makeone => 1, :getChildProject => 1, :getChildNodes => 0}
 
 
   def getChildProject
+
+   #p request.headers
    #controllers with respond_to
    #p direct_controllers = ActionController::Base.descendants.select{|klass| klass.mimes_for_respond_to.key?(:ext)}
    #skell :ext, :method => {:getChildProject => 1, :index => 2}
@@ -23,12 +27,19 @@ class ProjectsController < ApplicationController
    #p self.mimes_for_respond_to.key?(:ext)
    @project = {:name => "Project #{Random.rand(11)}"}
    #render :json => @project
-   respond_with @project
+   respond_with @project, :location => nil
+
   end
 
   def getChildNodes
    @nodes = Project.all
    render :json => @nodes
+  end
+
+
+  def makeone
+   @time = {:month => "Data was #{params[:data].class} on #{Time.now}"}
+   render :json => @time
   end
 
 

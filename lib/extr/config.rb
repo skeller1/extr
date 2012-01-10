@@ -20,13 +20,6 @@ module Extr
         @@controller_path ||= {}
       end
 
-      def allowed_model?()
-
-      end
-
-      def allowed_controller?()
-      end
-
       def has_model?(action)
         model_config.keys.include?(action)
       end

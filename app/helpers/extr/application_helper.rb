@@ -5,7 +5,7 @@ module Extr
     "<base href=\"#{base}\" />".html_safe
   end
 
-  def ext (theme = 'xtheme-blue',debug = nil, include_stylesheets = true)
+  def ext(theme = 'xtheme-blue',debug = nil, include_stylesheets = true)
     if debug.nil?
       debug = Rails.env.development? ? true : false
     end
@@ -36,17 +36,16 @@ HERE
   end
 
   def ext_direct_provider(namespace)
-    #begin
-    config = {
+   config = {
       'url'       =>   Extr::Config::ROUTER_PATH,
       'type'      =>   'remoting',
       'actions'   =>   Extr::Config.model_config.merge(Extr::Config.controller_config),
       'namespace' =>   namespace || "App" ,
       'srv_env'   =>    Rails.env
-    }
-    api="REMOTING_API = #{config.to_json}"
+   }
+   api="REMOTING_API = #{config.to_json}"
 
-    forgery = "(function() {
+   forgery = "(function() {
   var originalGetCallData = Ext.direct.RemotingProvider.prototype.getCallData;
   Ext.override(Ext.direct.RemotingProvider, {
    getCallData: function(t) {
@@ -58,28 +57,13 @@ HERE
   })
   })();"
 
-
-    javascript_tag forgery+"Ext.Direct.addProvider(#{api});"
-
-    #rescue
-    #  javascript_tag "alert('Something went wrong');"
-   # end
-
-    #controller_match = Rails.root.join('app', 'controllers','**', '*.rb')
-    #controller_files=Dir.glob(domain_match)
-
-
-    #controller_files.each do |f|
-    #  controller_name = File.basename(f,'.rb').capitalize
-    #end
-
-    #return 'Ext.Direct.addProvider(' . json_encode($providerConfig) . ');' . chr(10);
+   javascript_tag forgery+"Ext.Direct.addProvider(#{api});"
   end
 
   private
 
   def base
-    request.protocol+request.raw_host_with_port
+   request.protocol+request.raw_host_with_port
   end
 
   end
