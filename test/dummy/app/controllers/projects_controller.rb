@@ -3,20 +3,10 @@ class ProjectsController < ApplicationController
   # GET /projects.json
 
 
-  protect_from_forgery
-
-  include Extr::DirectController
-
-
-  respond_to :json#, :ext
-
-  #respond_to :ext
-
   extdirect :name => "Mike", :methods => {:makeone => 1, :getChildProject => 1, :getChildNodes => 0}
 
 
   def getChildProject
-
    #p request.headers
    #controllers with respond_to
    #p direct_controllers = ActionController::Base.descendants.select{|klass| klass.mimes_for_respond_to.key?(:ext)}
@@ -26,8 +16,8 @@ class ProjectsController < ApplicationController
    #instance_methods(false)
    #p self.mimes_for_respond_to.key?(:ext)
    @project = {:name => "Project #{Random.rand(11)}"}
-   #render :json => @project
-   respond_with @project, :location => nil
+   render :json => @project
+   #respond_with @project, :location => nil
 
   end
 

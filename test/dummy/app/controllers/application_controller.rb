@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery
 
-  #include Extr::DirectController
+  include Extr::DirectController
 
   #extdirect :methods => {:makeone => 1}
 
