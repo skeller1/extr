@@ -4,12 +4,6 @@ class ApplicationController < ActionController::Base
 
   include Extr::DirectController
 
-  #extdirect :methods => {:makeone => 1}
-
-  #def makeone
-  # @time = {:month => "Data was #{params[:data].class} on #{Time.now}"}
-  # render :json => @time
-  #end
 
 end
 

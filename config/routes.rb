@@ -4,7 +4,7 @@ Extr::Engine.routes.draw do
 Rails.application.routes.draw do
    match "#{Extr::Config::ROUTER_PATH}" => "extr/router#direct",
    :format => false,
-   :defaults => { :format => :ext },
+   :defaults => { :format => :json },
    :via => :post
 end
 

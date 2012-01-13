@@ -57,30 +57,14 @@ module Extr
     'result'  => ""
    }
 
-   #p request.env["rack.input"]
-
-
-    #debugger
-
-
    begin
 
     controller = Config.get_controller_path(self.action)
     token = get_token(controller)
 
-    unless controller.constantize.mimes_for_respond_to.key?(Mime::EXT.symbol)
-     self.request.format= :json
+    unless controller.constantize.mimes_for_respond_to.key?(Mime::JSON.symbol)
+     raise "Controller must respond_to :json"
     end
-
-    #my_env = self.request.env
-
-    #my_env["REQUEST_URI"] = request.host_with_port+"/#{controller.constantize.controller_path}"
-    #my_env["PATH_INFO"] = "/#{controller.constantize.controller_path}"
-    #my_env.delete("action_dispatch.request.request_parameters")
-    #my_env.delete("action_dispatch.request.parameters")
-    #my_env.delete("action_dispatch.path_parameters")
-
-
 
     params = HashWithIndifferentAccess.new
     params[:method] = self.method
@@ -88,13 +72,6 @@ module Extr
     params[:data] = self.data
     params[controller.constantize.request_forgery_protection_token] = token
     self.request.env["action_dispatch.request.parameters"] = params
-    self.request.env["action_dispatch.request.request_parameters"] = nil
-
-
-    #my_env["action_dispatch.request.parameters"] = params
-    #debugger
-    #body = controller.constantize.action(self.method).call(my_env).to_a.last.body
-
     body = controller.constantize.action(self.method).call(self.request.env).to_a.last.body
     ext['result'] = body.empty? ? "" : ActiveSupport::JSON.decode(body)
 

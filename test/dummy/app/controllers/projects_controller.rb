@@ -2,6 +2,7 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
 
+  respond_to :html#, :json
 
   extdirect :name => "Mike", :methods => {:makeone => 1, :getChildProject => 1, :getChildNodes => 0}
 
@@ -16,9 +17,10 @@ class ProjectsController < ApplicationController
    #instance_methods(false)
    #p self.mimes_for_respond_to.key?(:ext)
    @project = {:name => "Project #{Random.rand(11)}"}
-   render :json => @project
-   #respond_with @project, :location => nil
+   #render :json => @project
+   respond_with @project, :location => nil
 
+   #render :ext => @project
   end
 
   def getChildNodes
@@ -41,11 +43,10 @@ class ProjectsController < ApplicationController
 
   def index
     @projects = Project.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @projects }
-    end
+    respond_with @projects
+    #respond_to do |format|
+    #  format.html # index.html.erb
+    #  format.json { render json: @projects }
   end
 
   # GET /projects/1

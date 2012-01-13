@@ -1,0 +1,13 @@
+ProjectsController:
+    name: Mike
+    methods:
+        getChildProject: 2
+        bock: 4
+ApplicationController:
+    name: Jens
+    methods:
+GoogleController:
+    methods:
+        start: 2
+        end: 3
+
