@@ -63,7 +63,9 @@ module Extr
     token = get_token(controller)
 
     unless controller.constantize.mimes_for_respond_to.key?(Mime::JSON.symbol)
-     raise "Controller must respond_to :json"
+     if Rails.env.development?
+      raise "For supporting the rails way define respond_to :json in your controller"
+     end
     end
 
     params = HashWithIndifferentAccess.new

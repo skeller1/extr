@@ -6,7 +6,8 @@ ProjectsController:
 ApplicationController:
     name: Jens
     methods:
-GoogleController:
+        anja:
+Admin_GoogleController:
     methods:
         start: 2
         end: 3

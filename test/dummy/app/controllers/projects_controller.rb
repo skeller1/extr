@@ -2,25 +2,14 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
 
-  respond_to :html#, :json
+  respond_to :html, :json
 
   extdirect :name => "Mike", :methods => {:makeone => 1, :getChildProject => 1, :getChildNodes => 0}
 
 
   def getChildProject
-   #p request.headers
-   #controllers with respond_to
-   #p direct_controllers = ActionController::Base.descendants.select{|klass| klass.mimes_for_respond_to.key?(:ext)}
-   #skell :ext, :method => {:getChildProject => 1, :index => 2}
-   #p self.mimes_for_respond_to
-   #p self.instance_methods(false)
-   #instance_methods(false)
-   #p self.mimes_for_respond_to.key?(:ext)
    @project = {:name => "Project #{Random.rand(11)}"}
-   #render :json => @project
-   respond_with @project, :location => nil
-
-   #render :ext => @project
+   render :json => @project
   end
 
   def getChildNodes
@@ -35,18 +24,10 @@ class ProjectsController < ApplicationController
   end
 
 
-  #def getChildProject
-  #  @project = {:name => "Project #{Random.rand(11)}"}
-  #  respond_with @project
-  #end
-
 
   def index
     @projects = Project.all
     respond_with @projects
-    #respond_to do |format|
-    #  format.html # index.html.erb
-    #  format.json { render json: @projects }
   end
 
   # GET /projects/1

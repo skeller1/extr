@@ -77,10 +77,12 @@ Ready to start
     -   __ext__: Generate all necessary JS and CSS files for Ext Js
     -   __ext_direct_provider "Rails"__: Generate the Ext.Direct API Remote Provider Configuration with the namespace `Rails`
 
+    Feel free to choose your own Ext Js version.
+
 
 2.  __Make controller directable__
 
-    Simple including of the `Extr::DirectController` modul at the top of your controller (`projects_controller.rb`)
+    Simple including of the `Extr::DirectController` modul at the top of your controller (e.g. `projects_controller.rb`)
 
         class ProjectsController < ApplicationController
 
@@ -90,12 +92,12 @@ Ready to start
 
         end
 
-    If you want to prepare all Rails controllers being directable, you have to include the module in Rails ApplicationController.
-
 
 3.  __Register your directable controller actions__
 
-    Use the direct class method to register the directable controller actions
+    There are 2 different ways to define directable controller actions:
+
+    1. Use the direct class method to register the directable controller actions
 
         class ProjectsController < ApplicationController
 
@@ -116,6 +118,18 @@ Ready to start
 
     The numbers behind the method names specifies the amount of params that can passed in Javascript before the callback
 
+    2. Define all controller configurations in an initializer file (`config/initializers/extdirect.yml`):
+
+        ProjectsController:
+          methods:
+            getChildProject: 2
+            getOtherProject: 3
+        ApplicationController:
+          name: MyOwnControllerName
+          methods:
+            action1: 3
+            action2: 1
+        ...
 
 4. __Enable method rendering__
 
@@ -127,7 +141,7 @@ Ready to start
 
          extdirect :methods => {:get_child_project => 3, :get_parent_project => 1}
 
-         respond_to :ext
+         respond_to :json #optional, action must produce json output
 
 
          def get_child_project
@@ -141,18 +155,6 @@ Ready to start
          end
 
         end
-
-
-       The own mime type allows you json and ext requests in the same controller (no using of json for the response, technically :ext and :json deliver the same format: :json ).
-       Rendering with `respond_with` needs an own view `get_parent_project.ext.erb`. Don't forget to escape your json response in the view:
-
-        #get_parent_project.ext.erb
-
-        <%= @data.to_json.html_safe %>
-
-
-
-
 
 
 5. __Call controller actions on the client side__
@@ -180,8 +182,8 @@ Ready to start
 
 ## TODO
 
-* declaration of directable controller actions with xml and yaml in initializer file
-* json form post handling (upload files)
+* declaration of directable controller actions with xml and yaml in initializer file, 80%
+* json form post handling (upload files), 90%
 
 ## License
 
