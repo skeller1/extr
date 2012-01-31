@@ -125,15 +125,15 @@ Ready to start
             getChildProject: 2
             getOtherProject: 3
         ApplicationController:
-          name: MyOwnControllerName
           methods:
             action1: 3
             action2: 1
         ...
 
+
 4. __Enable method rendering__
 
-    The Extr gem registers a new mime type in your rails app: (`:ext => application/ext`). Using `respond_to :ext` allows you to create the response in 2 different ways:
+    Your directable controllers must render json: `respond_to :json`:
 
         class ProjectsController < ApplicationController
 
@@ -179,6 +179,44 @@ Ready to start
 ### Make your models directable
 
 ### Use different names for controller names
+
+    By using 3rd Party Ext Js scripts (or other circumstances) it would be nice using other controller names in your Rails app. So you can use the written JS without any changes. Only adapt your config:
+
+
+    1. In your controller use the `:name` option
+
+        class ProjectsController < ApplicationController
+
+         include Extr::DirectController
+
+         extdirect :name => "MyCustomController", :methods => {...}
+
+         ...
+
+        end
+
+    2. Use `name:` key in your yaml config
+
+        ProjectsController:
+          name: MyCustomController
+          methods:
+            getChildProject: 2
+            getOtherProject: 3
+        ApplicationController:
+          methods:
+            action1: 1
+            action2: 3
+          name: SuperApplicationController
+        ...
+
+
+
+    It's now possible to use this Ext Direct controller name in your JS scripts:
+
+        Rails.SuperApplicationController.action1(current_project,function(result,e){
+         alert(result);
+        })
+
 
 ## TODO
 
