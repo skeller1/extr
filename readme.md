@@ -1,7 +1,7 @@
 # __ExtR__
 
 
-__UNDER DEVELOPMENT!!!!! first stable release in begin of January 2012__
+__UNDER DEVELOPMENT!!!!! first stable release in begin of February 2012__
 
 __An open source Ruby on Rails 3.1.x engine for using ExtDirect in Rails Applications.__
 

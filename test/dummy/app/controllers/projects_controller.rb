@@ -4,7 +4,7 @@ class ProjectsController < ApplicationController
 
   respond_to :html, :json
 
-  extdirect :name => "Mike", :methods => {:makeone => 1, :getChildProject => 1, :getChildNodes => 0}
+  extdirect :methods => {:makeone => 1, :getChildProject => 1, :getChildNodes => 0}
 
 
   def getChildProject

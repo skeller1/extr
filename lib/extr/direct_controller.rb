@@ -12,7 +12,7 @@ module Extr
    def extdirect(*methods)
 
     options = methods.extract_options!
-    action = options.delete(:name) || self.gsub(":","")
+    action = options.delete(:name) || self.to_s.gsub(":","")
     Config.controller_path[action]=self.to_s
     Config.controller_config[action].clear
 

@@ -49,6 +49,7 @@ module Extr
   end
 
   def invoke_controller_method
+
    ext = {
     'type'    => 'rpc',
     'tid'     => self.tid,
