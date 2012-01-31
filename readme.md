@@ -179,8 +179,7 @@ Ready to start
 ### Make your models directable
 
 ### Use different names for controller names
-
-    By using 3rd Party Ext Js scripts (or other circumstances) it would be nice using other controller names in your Rails app. So you can use the written JS without any changes. Only adapt your config:
+By using 3rd Party Ext Js scripts (or other circumstances) it would be nice using other controller names in your Rails app. So you can use the written JS without any changes. Only adapt your config:
 
 
     1. In your controller use the `:name` option
