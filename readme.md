@@ -180,8 +180,6 @@ Ready to start
 
 ### Use different names for controller names
 By using 3rd Party Ext Js scripts (or other circumstances) it would be nice using other controller names in your Rails app. So you can use the written JS without any changes. Only adapt your config:
-
-
     1. In your controller use the `:name` option
 
         class ProjectsController < ApplicationController
@@ -209,7 +207,6 @@ By using 3rd Party Ext Js scripts (or other circumstances) it would be nice usin
         ...
 
 
-
     It's now possible to use this Ext Direct controller name in your JS scripts:
 
         Rails.SuperApplicationController.action1(current_project,function(result,e){
@@ -219,7 +216,6 @@ By using 3rd Party Ext Js scripts (or other circumstances) it would be nice usin
 
 ## TODO
 
-* declaration of directable controller actions with xml and yaml in initializer file, 80%
 * json form post handling (upload files), 90%
 
 ## License
