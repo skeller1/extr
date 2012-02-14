@@ -5,7 +5,13 @@ module Extr
     "<base href=\"#{base}\" />".html_safe
   end
 
-  def ext(theme = 'xtheme-blue',debug = nil, include_stylesheets = true)
+  def ext(*options)
+    #theme = 'xtheme-blue',debug = nil, include_stylesheets = true)
+    options = options.extract_options!
+    theme = options.delete(:theme) || 'xtheme-blue'
+    debug = options.delete(:debug) || false
+    include_stylesheets = options.delete(:include_stylesheets) || true
+
     if debug.nil?
       debug = Rails.env.development? ? true : false
     end
