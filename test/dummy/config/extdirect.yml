@@ -1,0 +1,14 @@
+ProjectsController:
+    methods:
+        getChildProject: 2
+        upload: 0
+        bock: 4
+ApplicationController:
+    name: Jens
+    methods:
+        anja:
+Admin_GoogleController:
+    methods:
+        start: 2
+        end: 3
+

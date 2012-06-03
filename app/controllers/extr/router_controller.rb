@@ -1,6 +1,8 @@
 module Extr
  class RouterController < ActionController::Base
 
+  respond_to :json
+
   def direct
    #debugger
    if request.form_data?

@@ -90,6 +90,8 @@ module Extr
 
   end
 
+  private
+
   def get_token(controller)
    request.env["action_dispatch.request.parameters"][controller.constantize.request_forgery_protection_token] ||=   request.env["action_dispatch.request.parameters"][:_json].first[controller.constantize.request_forgery_protection_token]
   end

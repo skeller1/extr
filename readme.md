@@ -1,15 +1,9 @@
 # __ExtR__
 
 
-__UNDER DEVELOPMENT!!!!! first stable release in begin of February 2012__
+__An open source Ruby on Rails 3.x engine for using ExtDirect in Rails Applications.__
 
-__An open source Ruby on Rails 3.1.x engine for using ExtDirect in Rails Applications.__
-
-ExtR is an Rails 3.1.x compatible implementation of the [Ext.Direct API specification](http://bla.de) from the famous [Sencha Ext Js Framework](http://www.sencha.com/). If you want to write Ext Js UI's with the power of Ruby have a look at [Netzke](http://netzke.org/), the brilliant Sencha Ext JS and Ruby on Rails component framework.
-
-
-
-
+ExtR is an Rails 3.x compatible implementation of the [Ext.Direct API specification](http://www.sencha.com/products/extjs/extdirect) from the famous [Sencha Ext Js Framework](http://www.sencha.com/). If you want to write Ext Js UI's with the power of Ruby have a look at [Netzke](http://netzke.org/), the brilliant Sencha Ext JS and Ruby on Rails component framework.
 
 
 ## Intension
@@ -36,8 +30,8 @@ Ext Js call with Ext.Direct API
 
 
 ## Requirements
-
-* [Rails 3.1.x](http://github.com/rails/rails)
+* ExtJS
+* [Rails 3.x](http://github.com/rails/rails)
 
 
 ## Install
@@ -57,15 +51,16 @@ Ready to start
 
 1.  __Prepare Ext JS dependencies__
 
-    Simple integration of the necessary JS and CSS files using the ExtR helper methods in your layout file (`application.html.erb`)
+    This gem doesn't provide any up to date ExtJS or ExtDirect components (Javascript or CSS files). It's up to you to make the neccessary files available in your layout file.
+
+   So everybody can feel free to choose the right ExtJS version with or without the power of Rails's Asset Pipeline.
 
         <!DOCTYPE html>
         <html>
          <head>
           <title>Extr</title>
           <%= csrf_meta_tags %>
-          <%= ext_base_tag %>
-          <%= ext %>
+          <!-- IMPORT OF JS and CSS FILES for ExtJS and Ext Direct -->
           <%= ext_direct_provider "Rails" %>
          </head>
          <body>
@@ -73,37 +68,20 @@ Ready to start
          </body>
         </html>
 
-    -   __ext_base_tag__: Generate a HTML base tag with the current host and port number)
-    -   __ext__: Generate all necessary JS and CSS files for Ext Js
-    -   __ext_direct_provider "Rails"__: Generate the Ext.Direct API Remote Provider Configuration with the namespace `Rails`
 
-    Feel free to choose your own Ext Js version.
+    In your `application layout file` you have to use the `ext_direct_provider` helper that generates the Ext Direct API Remote Provider Configuration with a specified namespace ( e.g. `Rails`)
 
 
-2.  __Make controller directable__
-
-    Simple including of the `Extr::DirectController` modul at the top of your controller (e.g. `projects_controller.rb`)
-
-        class ProjectsController < ApplicationController
-
-         include Extr::DirectController
-
-         #...
-
-        end
-
-
-3.  __Register your directable controller actions__
+2.  __Register your directable controller actions__
 
     There are 2 different ways to define directable controller actions:
 
-    1. Use the direct class method to register the directable controller actions
+    1. Use the `extdirect` class method to register the directable controller actions directly in your controller code.
 
         class ProjectsController < ApplicationController
 
-         include Extr::DirectController
 
-         extdirect :methods => {:get_child_project => 3, :get_parent_project => 1}
+         extdirect :methods => {:getChildProject => 3, :getParentProject => 1}
 
          def get_child_project
           #...
@@ -116,28 +94,33 @@ Ready to start
         end
 
 
-    The numbers behind the method names specifies the amount of params that can passed in Javascript before the callback
+    The numbers behind the method names specifies the amount of params that can passed in Javascript before the callback starts.
 
-    2. Define all controller configurations in an initializer file (`config/initializers/extdirect.yml`):
+    2. Define all controller configurations in a configuration file (`config/extdirect.yml`):
 
         ProjectsController:
           methods:
-            getChildProject: 2
-            getOtherProject: 3
+            getChildProject: 3
+            getParentProject: 1
+            ...
         ApplicationController:
           methods:
             action1: 3
             action2: 1
+        Admin_RegistrationController:
+          methods:
+            ...
+
         ...
 
+        Namespaced controllers must be written with an underscore (e.g. `Admin_RegistrationController`)
 
-4. __Enable method rendering__
+
+3. __Set Response format for the controller__
 
     Your directable controllers must render json: `respond_to :json`:
 
         class ProjectsController < ApplicationController
-
-         include Extr::DirectController
 
          extdirect :methods => {:get_child_project => 3, :get_parent_project => 1}
 
@@ -146,22 +129,26 @@ Ready to start
 
          def get_child_project
           @data = ...
+
+          # render :json direct in your controller
           render :json => @data
          end
 
          def get_parent_project
           @data = ...
+          # use own get_parent_project.json.erb view for json response
           respond_with @data
          end
 
         end
 
 
-5. __Call controller actions on the client side__
 
-    Create a Rails route to your new view that is a startpoint for your new Ext Js UI. Make sure that you load it with your `application.html.erb` layout file, that includes all the Ext Js stuff.
+4. __Call controller actions on the client side__
 
-    In your written JS files or in Firebug (Javascript console) you can use your ProjectsController actions:
+    Create a Rails route to your new view that is a startpoint for your new Ext Js UI. Make sure that you load it with your `application.html.erb` layout file, that includes all the Ext Js and Ext Direct files.
+
+    In your written JS files or in Firebug (Javascript console) you can call your `ProjectsController` actions:
 
         Rails.ProjectsController.get_child_project(current_project,function(result,e){
          alert(result);
@@ -169,17 +156,13 @@ Ready to start
 
 
 
-    Executing this script many times only results in one Rails request to the implemented Ext Js Direct Router.
+    Executing this script many times only results in one Rails request to the implemented Ext Js Direct Router controller.
 
-## Features
+## Additional Features
 
-
-### Make your controller directable
-
-### Make your models directable
 
 ### Use different names for controller names
-By using 3rd Party Ext Js scripts (or other circumstances) it would be nice using other controller names in your Rails app. So you can use the written JS without any changes. Only adapt your config:
+By using 3rd Party Ext Js scripts (or other circumstances) it would be nice using other controller names in your Rails app. So you can use 3rd party JS Files without any changes. Only adapt your config:
     1. In your controller use the `:name` option
 
         class ProjectsController < ApplicationController
@@ -192,7 +175,7 @@ By using 3rd Party Ext Js scripts (or other circumstances) it would be nice usin
 
         end
 
-    2. Use `name:` key in your yaml config
+    2. Use the  `name:` key in your yaml config
 
         ProjectsController:
           name: MyCustomController
@@ -213,6 +196,9 @@ By using 3rd Party Ext Js scripts (or other circumstances) it would be nice usin
          alert(result);
         })
 
+### Make models directable
+
+It's also simple to make
 
 ## TODO
 

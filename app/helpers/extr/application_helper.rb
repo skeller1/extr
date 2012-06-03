@@ -6,7 +6,6 @@ module Extr
   end
 
   def ext(*options)
-    #theme = 'xtheme-blue',debug = nil, include_stylesheets = true)
     options = options.extract_options!
     theme = options.delete(:theme) || 'xtheme-blue'
     debug = options.delete(:debug) || false
@@ -41,13 +40,14 @@ HERE
     return output.html_safe
   end
 
-  def ext_direct_provider(namespace)
+  def ext_direct_provider(namespace = "App")
+  p Extr::Config.controller_config
    config = {
       'url'       =>   Extr::Config::ROUTER_PATH,
       'type'      =>   'remoting',
       'actions'   =>   Extr::Config.model_config.merge(Extr::Config.controller_config),
-      'namespace' =>   namespace || "App" ,
-      'srv_env'   =>    Rails.env
+      'namespace' =>   namespace,
+      'srv_env'   =>   Rails.env
    }
    api="REMOTING_API = #{config.to_json}"
 

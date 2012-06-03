@@ -18,9 +18,9 @@ module Extr
 
     options.delete(:methods).stringify_keys!.merge!(DEFAULT_METHODS).each do |mtd, mcfg|
      if mcfg.is_a?(Hash)
-      Config.controller_config[action] << {'name' => mtd}.merge!(mcfg)
+      Config.controller_config[action] << {'name' => mtd, 'formHandler' => true}.merge!(mcfg)
      else
-      Config.controller_config[action] << { 'name' => mtd, 'len' => mcfg || 1 }
+      Config.controller_config[action] << { 'name' => mtd, 'len' => mcfg || 1, 'formHandler' => true }
      end
     end
    rescue => ex
