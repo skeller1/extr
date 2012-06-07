@@ -11,22 +11,27 @@ module Extr
        action = options["name"] || klass.gsub("_","")
        Config.controller_path[action]=klass.gsub("_","::").to_s
 
-       unless options["methods"].nil?
-        options["methods"].stringify_keys!.merge!(DirectController::DEFAULT_METHODS).each do |mtd, mcfg|
-         if mcfg.is_a?(Hash)
-          Config.controller_config[action] << {'name' => mtd}.merge!(mcfg)
-          #Config.controller_config[action] << {'name' => mtd, 'formHandler' => true}.merge!(mcfg)
-         else
-          Config.controller_config[action] << {'name' => mtd, 'len' => mcfg || 1}
-          #Config.controller_config[action] << { 'name' => mtd, 'len' => mcfg || 1, 'formHandler' => true }
+       keys = ["methods","formHandler"]
+
+       (options.keys & keys).each do |key|
+        unless options[key].nil?
+         options[key].stringify_keys!.merge!(DirectController::DEFAULT_METHODS).each do |mtd, mcfg|
+          method_hash = mcfg.is_a?(Hash) ? {'name' => mtd}.merge!(mcfg) : {'name' => mtd, 'len' => mcfg || 1}
+          method_hash[key]= true if key == "formHandler"
+          Config.controller_config[action] << method_hash
          end
         end
+
+       #END KEY LOOP
        end
+
+      #END YAML_LOAD_FILE
       end
 
      end
+
     end
 
-  end
+   end
 end
 

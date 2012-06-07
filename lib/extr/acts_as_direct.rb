@@ -13,6 +13,7 @@ module Extr
     module ClassMethods
       #todo implement name option for acts_as_direct
       def acts_as_direct(*methods)
+=begin
         options = methods.extract_options!
         Config.model_config[self.to_s].clear
         (options.delete(:methods) || {}).stringify_keys!.merge!(DEFAULT_METHODS).each do |mtd, mcfg|
@@ -25,6 +26,7 @@ module Extr
       rescue => ex
         Rails.logger.error ex.message
         Rails.logger.error ex.backtrace
+=end
       end
     end
 

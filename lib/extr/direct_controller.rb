@@ -10,7 +10,7 @@ module Extr
   module ClassMethods
 
    def extdirect(*methods)
-
+=begin
     options = methods.extract_options!
     action = options.delete(:name) || self.to_s.gsub(":","")
     Config.controller_path[action]=self.to_s
@@ -26,6 +26,7 @@ module Extr
    rescue => ex
     Rails.logger.error ex.message
     Rails.logger.error ex.backtrace
+=end
    end
 
   end
