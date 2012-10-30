@@ -38,7 +38,7 @@ Ext Js call with Ext.Direct API
 
 Add this line to your applications `Gemfile`
 
-    gem 'extr', :git => "git://github.com/skeller1/extr.git"
+    gem 'extr', :git => "git://github.com/skeller1/extr.git", :branch => "oop"
 
 Next run
 
@@ -60,7 +60,7 @@ Ready to start
          <head>
           <title>Extr</title>
           <%= csrf_meta_tags %>
-          <!-- IMPORT OF JS and CSS FILES for ExtJS and Ext Direct -->
+          <!-- PRevious IMPORT OF JS and CSS FILES for ExtJS and Ext Direct -->
           <%= ext_direct_provider "Rails" %>
          </head>
          <body>
@@ -76,33 +76,14 @@ Ready to start
 
     There are 2 different ways to define directable controller actions:
 
-    1. Use the `extdirect` class method to register the directable controller actions directly in your controller code.
-
-        class ProjectsController < ApplicationController
-
-
-         extdirect :methods => {:getChildProject => 3, :getParentProject => 1}
-
-         def get_child_project
-          #...
-         end
-
-         def get_parent_project
-          #...
-         end
-
-        end
-
-
-    The numbers behind the method names specifies the amount of params that can passed in Javascript before the callback starts.
-
-    2. Define all controller configurations in a configuration file (`config/extdirect.yml`):
+    1. Define all controller configurations in a configuration file (`config/extdirect.yml`):
 
         ProjectsController:
           methods:
             getChildProject: 3
             getParentProject: 1
-            ...
+          formHandler:
+            getUpload: 1
         ApplicationController:
           methods:
             action1: 3
@@ -121,8 +102,6 @@ Ready to start
     Your directable controllers must render json: `respond_to :json`:
 
         class ProjectsController < ApplicationController
-
-         extdirect :methods => {:get_child_project => 3, :get_parent_project => 1}
 
          respond_to :json #optional, action must produce json output
 
@@ -163,19 +142,7 @@ Ready to start
 
 ### Use different names for controller names
 By using 3rd Party Ext Js scripts (or other circumstances) it would be nice using other controller names in your Rails app. So you can use 3rd party JS Files without any changes. Only adapt your config:
-    1. In your controller use the `:name` option
-
-        class ProjectsController < ApplicationController
-
-         include Extr::DirectController
-
-         extdirect :name => "MyCustomController", :methods => {...}
-
-         ...
-
-        end
-
-    2. Use the  `name:` key in your yaml config
+    1. Use the  `name:` key in your yaml config
 
         ProjectsController:
           name: MyCustomController
@@ -195,14 +162,6 @@ By using 3rd Party Ext Js scripts (or other circumstances) it would be nice usin
         Rails.SuperApplicationController.action1(current_project,function(result,e){
          alert(result);
         })
-
-### Make models directable
-
-It's also simple to make
-
-## TODO
-
-* json form post handling (upload files), 90%
 
 ## License
 

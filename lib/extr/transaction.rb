@@ -8,7 +8,6 @@ module Extr
   validates :method, :presence => true
   validates :tid, :presence => true, :numericality => {:greater_than => 0}
 
-
   attr_reader :request, :action, :method, :data, :tid
 
   def initialize(request, action, method, tid, data)
@@ -18,7 +17,6 @@ module Extr
    @data = data
    @tid = tid
   end
-
 
   def response
    invoke_controller_method
@@ -38,23 +36,20 @@ module Extr
 
    begin
 
-    controller = Config.get_controller_path(self.action)
-    token = get_token(controller)
+    controller_klass = Config.get_controller_path(self.action).constantize
+    token = get_token(controller_klass)
 
-    unless controller.constantize.mimes_for_respond_to.key?(Mime::JSON.symbol)
+    unless controller_klass.mimes_for_respond_to.key?(Mime::JSON.symbol)
      if Rails.env.development?
       raise "For supporting the rails way define respond_to :json in your controller"
      end
     end
 
     ext_params = HashWithIndifferentAccess.new
-    ext_params[:method] = self.method
-    ext_params[:tid] = self.tid
-    ext_params[:data] = "bla"
-    ext_params[controller.constantize.request_forgery_protection_token] = token
+    #ext_params[controller_klass.request_forgery_protection_token] = token
+    #self.request.env["action_dispatch.request.parameters"] = ext_params
 
-    self.request.env["action_dispatch.request.parameters"] = ext_params
-    body = controller.constantize.action(self.method).call(self.request.env).to_a.last.body
+    body = controller_klass.action(self.method).call(self.request.env).to_a.last.body
     ext['result'] = body.empty? ? "" : ActiveSupport::JSON.decode(body)
 
    rescue => e
@@ -72,7 +67,7 @@ module Extr
   private
 
   def get_token(controller)
-   request.env["action_dispatch.request.parameters"][controller.constantize.request_forgery_protection_token] ||=   request.env["action_dispatch.request.parameters"][:_json].first[controller.constantize.request_forgery_protection_token]
+   request.env["action_dispatch.request.parameters"][controller.request_forgery_protection_token] ||=   request.env["action_dispatch.request.parameters"][:_json].first[controller.request_forgery_protection_token]
   end
 
  end

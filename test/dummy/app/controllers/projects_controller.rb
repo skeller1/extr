@@ -8,6 +8,9 @@ class ProjectsController < ApplicationController
 
 
   def getChildProject
+   #p "##########################################"
+   #p request.env["action_dispatch.request.request_parameters"]
+   #p "##########################################"
    @project = {:name => "Project #{Random.rand(11)}"}
    render :json => @project
   end

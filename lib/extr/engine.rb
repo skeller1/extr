@@ -15,7 +15,7 @@ module Extr
 
        (options.keys & keys).each do |key|
         unless options[key].nil?
-         options[key].stringify_keys!.merge!(DirectController::DEFAULT_METHODS).each do |mtd, mcfg|
+         options[key].stringify_keys!.each do |mtd, mcfg|
           method_hash = mcfg.is_a?(Hash) ? {'name' => mtd}.merge!(mcfg) : {'name' => mtd, 'len' => mcfg || 1}
           method_hash[key]= true if key == "formHandler"
           Config.controller_config[action] << method_hash

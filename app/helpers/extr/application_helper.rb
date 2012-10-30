@@ -45,7 +45,7 @@ HERE
    config = {
       'url'       =>   Extr::Config::ROUTER_PATH,
       'type'      =>   'remoting',
-      'actions'   =>   Extr::Config.model_config.merge(Extr::Config.controller_config),
+      'actions'   =>   Extr::Config.controller_config,
       'namespace' =>   namespace,
       'srv_env'   =>   Rails.env
    }
