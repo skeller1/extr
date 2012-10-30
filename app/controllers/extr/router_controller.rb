@@ -4,12 +4,7 @@ module Extr
   respond_to :json
 
   def direct
-   #debugger
-   if request.form_data?
-    #todo implement form_posts
-   else
-    body = transactions.map(&:response)
-   end
+   body = transactions.map(&:response)
    render :json => body ||= ""
   end
 
@@ -23,7 +18,11 @@ module Extr
   def collect_transactions
    arr = []
    raw_http_params.each do |p|
-    t = Transaction.new(request, p[:action], p[:method], p[:data], p[:tid])
+    if request.form_data?
+      t = Transaction.new(request, p.delete(:extAction), p.delete(:extMethod), p.delete(:extTID), p.delete(:data))
+    else
+      t = Transaction.new(request, p[:action], p[:method], p[:tid], p[:data])
+    end
     arr << t if t.valid?
    end
    return arr

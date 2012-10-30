@@ -11,42 +11,20 @@ module Extr
 
   attr_reader :request, :action, :method, :data, :tid
 
-  def initialize(request, action, method, data , tid)
+  def initialize(request, action, method, tid, data)
    @request = request
    @action = action
    @method = method
    @data = data
    @tid = tid
-   @model_transaction = Config.has_model?(action)
   end
 
 
   def response
-   model_transaction? ? invoke_model_method : invoke_controller_method
-  end
-
-  def model_transaction?
-   @model_transaction
+   invoke_controller_method
   end
 
   private
-
-  def invoke_model_method
-   #unless self.data.nil?
-   # return_val = self.action.constantize.send(self.method)
-   # #return_val = action.constantize.send(method, *normalize_params_for(action,parameters))
-   #else
-   # return_val = self.action.constantize.send(self.method)
-   #end
-   ext = {
-    'type'    => 'rpc',
-    'tid'     => self.tid,
-    'action'  => self.action,
-    'method'  => self.method,
-    'result'  => self.action.constantize.send(self.method)
-   }
-
-  end
 
   def invoke_controller_method
 
@@ -69,12 +47,13 @@ module Extr
      end
     end
 
-    params = HashWithIndifferentAccess.new
-    params[:method] = self.method
-    params[:tid] = self.tid
-    params[:data] = self.data
-    params[controller.constantize.request_forgery_protection_token] = token
-    self.request.env["action_dispatch.request.parameters"] = params
+    ext_params = HashWithIndifferentAccess.new
+    ext_params[:method] = self.method
+    ext_params[:tid] = self.tid
+    ext_params[:data] = "bla"
+    ext_params[controller.constantize.request_forgery_protection_token] = token
+
+    self.request.env["action_dispatch.request.parameters"] = ext_params
     body = controller.constantize.action(self.method).call(self.request.env).to_a.last.body
     ext['result'] = body.empty? ? "" : ActiveSupport::JSON.decode(body)
 
