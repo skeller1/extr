@@ -60,7 +60,7 @@ Ready to start
          <head>
           <title>Extr</title>
           <%= csrf_meta_tags %>
-          <!-- PRevious IMPORT OF JS and CSS FILES for ExtJS and Ext Direct -->
+          <!-- Previous IMPORT OF JS and CSS FILES for ExtJS and Ext Direct -->
           <%= ext_direct_provider "Rails" %>
          </head>
          <body>
@@ -74,7 +74,7 @@ Ready to start
 
 2.  __Register your directable controller actions__
 
-    There are 2 different ways to define directable controller actions:
+    There is one way to define directable controller actions:
 
     1. Define all controller configurations in a configuration file (`config/extdirect.yml`):
 
