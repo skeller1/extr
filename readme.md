@@ -74,27 +74,25 @@ Ready to start
 
 2.  __Register your directable controller actions__
 
-    There is one way to define directable controller actions:
-
-    1. Define all controller configurations in a configuration file (`config/extdirect.yml`):
-
+    Define all controller configurations in a configuration file (`config/extdirect.yml`):
+    
         ProjectsController:
-          methods:
+        methods:
             getChildProject: 3
-            getParentProject: 1
-          formHandler:
-            getUpload: 1
+                getParentProject: 1
+            formHandler:
+                getUpload: 1
         ApplicationController:
-          methods:
-            action1: 3
-            action2: 1
+            methods:
+                action1: 3
+                action2: 1
         Admin_RegistrationController:
-          methods:
+            methods:
             ...
 
         ...
 
-        Namespaced controllers must be written with an underscore (e.g. `Admin_RegistrationController`)
+    Namespaced controllers must be written with an underscore (e.g. `Admin_RegistrationController`)
 
 
 3. __Set Response format for the controller__
