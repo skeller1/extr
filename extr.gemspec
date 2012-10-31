@@ -10,13 +10,13 @@ Gem::Specification.new do |s|
   s.authors     = ["Stephan Keller"]
   s.email       = ["MiStK@gmx.de"]
   s.homepage    = "http://github.com/skeller1/extr/"
-  s.summary     = "Extr is a Ext Direct Implementation for Rails 3.1"
-  s.description = "Extr is a Rails 3.1 Ext Direct Router with View Helpers and some adjustment abilities."
+  s.summary     = "Extr is a Ext Direct Implementation for Rails 3.x"
+  s.description = "Extr is a Rails 3.x Ext Direct Router with View Helpers and some adjustment abilities."
 
   s.files = Dir["{app,config,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "readme.md"]
   s.test_files = Dir["test/**/*"]
 
-  s.add_dependency "rails", ">= 3.1.0"
+  s.add_dependency "rails", "> 3.0"
 
   # s.add_dependency "jquery-rails"
 
