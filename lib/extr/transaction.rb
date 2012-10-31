@@ -8,14 +8,20 @@ module Extr
   validates :method, :presence => true
   validates :tid, :presence => true, :numericality => {:greater_than => 0}
 
-  attr_reader :request, :action, :method, :data, :tid
+  attr_reader :request, :action, :method, :data, :tid, :upload
 
-  def initialize(request, action, method, tid, data)
+  def initialize(request, action, method, tid, data, upload)
    @request = request
    @action = action
    @method = method
    @data = data
    @tid = tid
+   @upload = upload
+  end
+
+
+  def uploadable?
+   @upload ? true : false
   end
 
   def response
@@ -45,12 +51,20 @@ module Extr
      end
     end
 
-    ext_params = HashWithIndifferentAccess.new
+    #ext_params = HashWithIndifferentAccess.new
     #ext_params[controller_klass.request_forgery_protection_token] = token
     #self.request.env["action_dispatch.request.parameters"] = ext_params
 
+    if self.uploadable?
+     controller_klass.headers["Content-Type"] = "text/html"
+    end
+
     body = controller_klass.action(self.method).call(self.request.env).to_a.last.body
     ext['result'] = body.empty? ? "" : ActiveSupport::JSON.decode(body)
+
+    if self.uploadable?
+      ext['result'] = '<html><body><textarea>'+ext['result'].to_s+'</textarea></body></html>'
+    end
 
    rescue => e
     if Rails.env.development?

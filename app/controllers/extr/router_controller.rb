@@ -19,9 +19,9 @@ module Extr
    arr = []
    raw_http_params.each do |p|
     if request.form_data?
-      t = Transaction.new(request, p.delete(:extAction), p.delete(:extMethod), p.delete(:extTID), p.delete(:data))
+      t = Transaction.new(request, p.delete(:extAction), p.delete(:extMethod), p.delete(:extTID), p.delete(:data), p.delete(:extUpload))
     else
-      t = Transaction.new(request, p[:action], p[:method], p[:tid], p[:data])
+      t = Transaction.new(request, p[:action], p[:method], p[:tid], p[:data], false)
     end
     arr << t if t.valid?
    end

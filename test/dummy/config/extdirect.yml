@@ -3,4 +3,10 @@ ProjectsController:
   getChildProject: 2
  formHandler:
   upload: 0
+ApplicationController:
+ methods:
+  action1: 1
+  action2: 2
+ formHandler:
+  action3: 2
 
