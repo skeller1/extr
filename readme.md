@@ -38,7 +38,7 @@ Ext Js call with Ext.Direct API
 
 Add this line to your applications `Gemfile`
 
-    gem 'extr', :git => "git://github.com/skeller1/extr.git", :branch => "oop"
+    gem 'extr', :git => "git://github.com/skeller1/extr.git", :branch => "master"
 
 Next run
 
