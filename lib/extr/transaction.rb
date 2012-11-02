@@ -48,15 +48,18 @@ module Extr
      raise "For supporting the rails way define respond_to :json in your controller"
     end
 
-    ext_params = HashWithIndifferentAccess.new
-    ext_params[:data] = self.data
+    #TODO CLEAN submitted params to each controller action
+    #ext_params = HashWithIndifferentAccess.new
+    #ext_params[:data] = self.data
+    #ext_params[controller_klass.request_forgery_protection_token] = token
 
     if self.request.form_data?
      token = get_token(controller_klass)
-     ext_params[controller_klass.request_forgery_protection_token] = token
+     self.request.env["action_dispatch.request.parameters"][controller_klass.request_forgery_protection_token] = token
+
     end
 
-    self.request.env["action_dispatch.request.parameters"] = ext_params
+    #self.request.env["action_dispatch.request.parameters"] = ext_params
 
     body = controller_klass.action(self.method).call(self.request.env).to_a.last.body
     ext['result'] = body.empty? ? "" : ActiveSupport::JSON.decode(body)

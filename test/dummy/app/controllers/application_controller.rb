@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
   end
 
   def action3
-    render :json => {:success => true, :date => Time.now, :fileContents => 'ddd' }
+    render :json => {:success => true, :date => Time.now, :fileContents => params[:skeller].read }
   end
 
 
