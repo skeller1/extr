@@ -10,12 +10,13 @@ class ApplicationController < ActionController::Base
 
 
   def action2
-
+      render :inline => "#{request.inspect}"
   end
 
   def action3
-    render :json => {:Date => Time.now}
+    render :json => {:success => true, :date => Time.now, :fileContents => 'ddd' }
   end
+
 
 end
 

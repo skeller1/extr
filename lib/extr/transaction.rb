@@ -43,28 +43,23 @@ module Extr
    begin
 
     controller_klass = Config.get_controller_path(self.action).constantize
-    token = get_token(controller_klass)
 
     unless controller_klass.mimes_for_respond_to.key?(Mime::JSON.symbol)
-     if Rails.env.development?
-      raise "For supporting the rails way define respond_to :json in your controller"
-     end
+     raise "For supporting the rails way define respond_to :json in your controller"
     end
 
-    #ext_params = HashWithIndifferentAccess.new
-    #ext_params[controller_klass.request_forgery_protection_token] = token
-    #self.request.env["action_dispatch.request.parameters"] = ext_params
+    ext_params = HashWithIndifferentAccess.new
+    ext_params[:data] = self.data
 
-    if self.uploadable?
-     controller_klass.headers["Content-Type"] = "text/html"
+    if self.request.form_data?
+     token = get_token(controller_klass)
+     ext_params[controller_klass.request_forgery_protection_token] = token
     end
+
+    self.request.env["action_dispatch.request.parameters"] = ext_params
 
     body = controller_klass.action(self.method).call(self.request.env).to_a.last.body
     ext['result'] = body.empty? ? "" : ActiveSupport::JSON.decode(body)
-
-    if self.uploadable?
-      ext['result'] = '<html><body><textarea>'+ext['result'].to_s+'</textarea></body></html>'
-    end
 
    rescue => e
     if Rails.env.development?
@@ -83,6 +78,7 @@ module Extr
   def get_token(controller)
    request.env["action_dispatch.request.parameters"][controller.request_forgery_protection_token] ||=   request.env["action_dispatch.request.parameters"][:_json].first[controller.request_forgery_protection_token]
   end
+
 
  end
 

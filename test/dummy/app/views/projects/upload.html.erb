@@ -485,8 +485,10 @@ Ext.onReady(function() {
     buttons: [ {
       text: "Submit",
       handler: function() {
+        alert("Hello");
         form.getForm().submit( {
           success: function(form, action) {
+            alert("Hello");
             textArea1.setValue(action.result.fileContents);
           },
           failure: function(form, action) {

@@ -49,15 +49,19 @@ HERE
    api="REMOTING_API = #{config.to_json}"
 
    forgery = "(function() {
-  var originalGetCallData = Ext.direct.RemotingProvider.prototype.getCallData;
-  Ext.override(Ext.direct.RemotingProvider, {
-   getCallData: function(t) {
-    var defaults = originalGetCallData.apply(this, arguments);
-    return Ext.apply(defaults, {
-     #{request_forgery_protection_token}: '#{form_authenticity_token}'
-    });
-   }
-  })
+  Ext.Ajax.defaultHeaders = {
+    'X-CSRF-Token': '#{form_authenticity_token}'
+  };
+
+  //var originalGetCallData = Ext.direct.RemotingProvider.prototype.getCallData;
+  //Ext.override(Ext.direct.RemotingProvider, {
+  // getCallData: function(t) {
+  //  var defaults = originalGetCallData.apply(this, arguments);
+  //  return Ext.apply(defaults, {
+  //   #{request_forgery_protection_token}: '#{form_authenticity_token}'
+  //  });
+  // }
+  //})
   })();"
 
    javascript_tag forgery+"Ext.Direct.addProvider(#{api});"
