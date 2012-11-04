@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    extr (0.0.1)
+    extr (1.0.0)
       rails (> 3.0)
 
 GEM
