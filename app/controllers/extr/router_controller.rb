@@ -6,12 +6,9 @@ module Extr
   respond_to :html, :json
 
   def direct
-
-   p request.headers['X-CSRF-Token']
-
    body = transactions.map(&:response)
 
-   if request.form_data?
+   if request.form_data? and extjs_form_with_upload
     render :inline => "<html><body><textarea>#{body.to_json}</textarea></body></html>", :content_type => 'text/html'
    else
     render :json => body ||= ""
@@ -19,6 +16,10 @@ module Extr
   end
 
  private
+
+  def extjs_form_with_upload
+   params.select{|k,v| v.class == ActionDispatch::Http::UploadedFile}.any?
+  end
 
   def transactions
    @transactions ||= collect_transactions

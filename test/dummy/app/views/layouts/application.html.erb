@@ -7,9 +7,8 @@
   <%= csrf_meta_tags %>
 
   <%= ext_base_tag %>
-  <%= ext :debug => true, :include_stylesheets => true %>
-  <%= ext_direct_provider "Rails" %>
-
+  <%#= ext :debug => true, :include_stylesheets => true %>
+  <%= yield :head %>
 
 </head>
 <body>

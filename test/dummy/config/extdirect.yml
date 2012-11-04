@@ -9,4 +9,12 @@ ApplicationController:
   action2: 2
  formHandler:
   action3: 2
+ProfilsController:
+ name: Profil
+ methods:
+  getBasicInfo: 1
+  getPhoneInfo: 1
+  getLocationInfo: 1
+ formHandler:
+  updateBasicInfo: 0
 

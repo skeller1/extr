@@ -4,13 +4,7 @@ class ProjectsController < ApplicationController
 
   respond_to :html, :json
 
-  #extdirect :methods => {:makeone => 1, :getChildProject => 1, :getChildNodes => 0}
-
-
   def getChildProject
-   #p "##########################################"
-   #p request.env["action_dispatch.request.request_parameters"]
-   #p "##########################################"
    @project = {:name => "Project #{Random.rand(11)}"}
    render :json => @project
   end
@@ -19,23 +13,6 @@ class ProjectsController < ApplicationController
    @nodes = Project.all
    render :json => @nodes
   end
-
-
-  def makeone
-   @time = {:month => "Data was #{params[:data].class} on #{Time.now}"}
-   render :json => @time
-  end
-
-
-  def upload
-
-   if request.post?
-    @time = {:month => "Data was #{params[:data].class} on #{Time.now}"}
-    render :json => @time
-   end
-
-  end
-
 
   def index
     @projects = Project.all

@@ -2,10 +2,10 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery
 
-  respond_to :json
+  respond_to :html, :json
 
   def action1
-    render :json => {:Date => Time.now}
+    render :json => {:date => Time.now}
   end
 
 
@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
   end
 
   def action3
-    render :json => {:success => true, :date => Time.now, :fileContents => params[:skeller].read }
+    render :json => {:success => true, :date => Time.now, :fileContents => params[:fileUpload1].nil? ? "": params[:fileUpload1].read}
   end
 
 

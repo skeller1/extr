@@ -45,21 +45,20 @@ module Extr
     controller_klass = Config.get_controller_path(self.action).constantize
 
     unless controller_klass.mimes_for_respond_to.key?(Mime::JSON.symbol)
-     raise "For supporting the rails way define respond_to :json in your controller"
+     raise "For supporting the rails way define at least respond_to :json in that controller: #{controller_klass}"
     end
 
-    #TODO CLEAN submitted params to each controller action
-    #ext_params = HashWithIndifferentAccess.new
-    #ext_params[:data] = self.data
-    #ext_params[controller_klass.request_forgery_protection_token] = token
-
-    if self.request.form_data?
-     token = get_token(controller_klass)
-     self.request.env["action_dispatch.request.parameters"][controller_klass.request_forgery_protection_token] = token
-
+    unless self.request.form_data?
+     ext_params = HashWithIndifferentAccess.new
+     ext_params[:data] = self.data
+     self.request.env["action_dispatch.request.parameters"] = ext_params
     end
 
-    #self.request.env["action_dispatch.request.parameters"] = ext_params
+    self.request.env["REQUEST_PATH"] = controller_klass.controller_path
+    self.request.env["PATH_INFO"] = controller_klass.controller_path
+    self.request.env["REQUEST_URI"] = controller_klass.controller_path
+    self.request.env["HTTP_ORIGIN"] = controller_klass.controller_path
+    self.request.env["ORIGINAL_FULLPATH"] = controller_klass.controller_path
 
     body = controller_klass.action(self.method).call(self.request.env).to_a.last.body
     ext['result'] = body.empty? ? "" : ActiveSupport::JSON.decode(body)
@@ -75,13 +74,6 @@ module Extr
    end
 
   end
-
-  private
-
-  def get_token(controller)
-   request.env["action_dispatch.request.parameters"][controller.request_forgery_protection_token] ||=   request.env["action_dispatch.request.parameters"][:_json].first[controller.request_forgery_protection_token]
-  end
-
 
  end
 
