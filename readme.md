@@ -75,19 +75,22 @@ Ready to start
 2.  __Register your directable controller actions__
 
     Define all controller configurations in a configuration file (`config/extdirect.yml`):
-    
+
         ProjectsController:
-        methods:
-            getChildProject: 3
-                getParentProject: 1
-            formHandler:
-                getUpload: 1
+         methods:
+          getChildProject: 3
+          getParentProject: 1
+         formHandler:
+          getUpload: 0
         ApplicationController:
-            methods:
-                action1: 3
-                action2: 1
+         methods:
+          action1: 3
+          action2: 1
+         formHandler:
+          action3: 2
+          action4: 1
         Admin_RegistrationController:
-            methods:
+         methods:
             ...
 
         ...
