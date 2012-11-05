@@ -1,3 +1,4 @@
+[![Dependency Status](https://gemnasium.com/skeller1/extr.png)](https://gemnasium.com/skeller1/extr)
 [![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/skeller1/extr)
 
 # __ExtR__
@@ -40,7 +41,7 @@ Ext Js call with Ext.Direct API
 
 Add this line to your applications `Gemfile`
 
-    gem 'extr', :git => "git://github.com/skeller1/extr.git", :branch => "master"
+    gem 'extr'
 
 Next run
 
@@ -76,7 +77,7 @@ Ready to start
 
 2.  __Register your directable controller actions__
 
-    Define all controller configurations in a configuration file (`config/extdirect.yml`):
+    Define your controller configuration in one configuration file (`config/extdirect.yml`):
 
         ProjectsController:
          methods:
@@ -144,8 +145,7 @@ Ready to start
 
 
 ### Use different names for controller names
-By using 3rd Party Ext Js scripts (or other circumstances) it would be nice using other controller names in your Rails app. So you can use 3rd party JS Files without any changes. Only adapt your config:
-    1. Use the  `name:` key in your yaml config
+By using 3rd Party Ext Js scripts (or other circumstances) it would be nice using other controller names in your Rails app. So you can use 3rd party JS Files without any changes using the `name:` key in your yaml config:
 
         ProjectsController:
           name: MyCustomController
@@ -160,13 +160,12 @@ By using 3rd Party Ext Js scripts (or other circumstances) it would be nice usin
         ...
 
 
-    It's now possible to use this Ext Direct controller name in your JS scripts:
+It's now possible to use this Ext Direct controller name in your JS scripts:
 
-        Rails.SuperApplicationController.action1(current_project,function(result,e){
-         alert(result);
-        })
+    Rails.SuperApplicationController.action1(current_project,function(result,e){
+     alert(result);
+    })
 
 ## License
-
-    MIT-LICENSE
+Extr is released under the [MIT License](http://www.opensource.org/licenses/MIT).
 
