@@ -166,7 +166,7 @@ Ready to start
 
 ## Additional Features
 
-### Use different names for controller names
+### Use other name for controller
 By using 3rd Party ExtJS scripts (or other circumstances) it would be nice using other controller names in your Rails app. So you can use 3rd party ExtJS Files without any changes using the `name:` key in your yaml config:
 
         ProjectsController:
