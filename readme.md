@@ -190,8 +190,8 @@ It's now possible to use this Ext.Direct controller name in your scripts:
 
 ##TODO
     
-*Defining providers for different namespaces in yaml config file
-*Find a way to add authenticity token to each form post component by default (Is it possible???)
+* Defining providers for different namespaces in yaml config file
+* Find a way to add authenticity token to each form post component by default (Is it possible???)
 
 ## License
 Extr is released under the [MIT License](http://www.opensource.org/licenses/MIT).
