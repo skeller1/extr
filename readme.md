@@ -129,7 +129,7 @@ Ready to start
 
 4. __Call controller actions on the client side__
 
-    Create a Rails route to your new view that is a startpoint for your new Ext Js UI. Make sure that you load it with your `application.html.erb` layout file, that includes all the Ext Js and Ext Direct files.
+    Create a Rails route to your new view that is a startpoint for your new ExtJS UI. Make sure that you load it with your `application.html.erb` layout file, that includes all the Ext Js and Ext Direct files.
 
     In your written JS files or in Firebug (Javascript console) you can call your `ProjectsController` actions:
 
@@ -139,7 +139,7 @@ Ready to start
 
 
 
-    Executing this script many times only results in one Rails request to the implemented Ext Js Direct Router controller.
+    Executing this script many times only results in one Rails request to the implemented ExtJS Direct Router controller.
 
 5. __Rails, ActionController, Ext.Direct and `protect_from_forgery`__
 
@@ -147,7 +147,7 @@ Ready to start
     The Extr application_helper `ext_direct_provider` [adds the form_authenticity_token](https://github.com/skeller1/extr/blob/master/app/helpers/extr/application_helper.rb#L29) to each action used with HTTP GET method. So there's nothing to do.
     
     2. __POST Requests (form posts):__
-    If you want to use Ext Direct with form posts (formHandler actions) you have to add the authenticity token to the base params of your EXT JS panel:
+    If you want to use Ext.Direct with form posts (formHandler actions) you have to add the authenticity token to the base params of your EXT JS panel:
     
             var my_panel = Ext.create('Ext.form.Panel', {
 	        baseParams: {
