@@ -4,7 +4,7 @@
 # __ExtR__
 
 
-__An open source Ruby on Rails 3.x engine for using ExtDirect in Rails Applications.__
+__An open source Ruby on Rails 3.x engine for using Ext.Direct in Rails Applications.__
 
 ExtR is an Rails 3.x compatible implementation of the [Ext.Direct API specification](http://www.sencha.com/products/extjs/extdirect) from the famous [Sencha Ext Js Framework](http://www.sencha.com/). If you want to write Ext Js UI's with the power of Ruby have a look at [Netzke](http://netzke.org/), the brilliant Sencha Ext JS and Ruby on Rails component framework.
 
@@ -25,7 +25,7 @@ Normal Ajax call with JQuery
     });
 
 
-Ext Js call with Ext.Direct API
+ExtJS call with Ext.Direct API
 
     Rails.Projects.all(function(r,e){
         alert("Got all projects");
@@ -52,7 +52,7 @@ Ready to start
 
 ## Usage
 
-1.  __Prepare Ext JS dependencies__
+1.  __Prepare ExtJS dependencies__
 
     This gem doesn't provide any up to date ExtJS or ExtDirect components (Javascript or CSS files). It's up to you to make the neccessary files available in your layout file.
 
@@ -63,7 +63,7 @@ Ready to start
          <head>
           <title>Extr</title>
           <%= csrf_meta_tags %>
-          <!-- Previous IMPORT OF JS and CSS FILES for ExtJS and Ext Direct -->
+          <!-- Previous IMPORT OF JS and CSS FILES for ExtJS and Ext.Direct -->
           <%= ext_direct_provider "Rails" %>
          </head>
          <body>
@@ -72,7 +72,7 @@ Ready to start
         </html>
 
 
-    In your `application layout file` you have to use the `ext_direct_provider` helper that generates the Ext Direct API Remote Provider Configuration with a specified namespace ( e.g. `Rails`)
+    In your `application layout file` you have to use the `ext_direct_provider` helper that generates the Ext.Direct API Remote Provider Configuration with a specified namespace ( e.g. `Rails`)
 
 
 2.  __Register your directable controller actions__
@@ -80,10 +80,10 @@ Ready to start
     Define your controller configuration in one configuration file (`config/extdirect.yml`):
 
         ProjectsController:
-         methods:
+         methods:   #all actions for GET Requests
           getChildProject: 3
           getParentProject: 1
-         formHandler:
+         formHandler: #all actions for FORM POST Requests
           getUpload: 0
         ApplicationController:
          methods:
@@ -107,7 +107,7 @@ Ready to start
 
         class ProjectsController < ApplicationController
 
-         respond_to :json #optional, action must produce json output
+         respond_to :json #action must produce json output
 
 
          def get_child_project
@@ -141,11 +141,33 @@ Ready to start
 
     Executing this script many times only results in one Rails request to the implemented Ext Js Direct Router controller.
 
+5. __Rails, ActionController, Ext.Direct and `protect_from_forgery`__
+
+    1. __GET Requests:__
+    The Extr application_helper `ext_direct_provider` [adds the form_authenticity_token](https://github.com/skeller1/extr/blob/master/app/helpers/extr/application_helper.rb#L29) to each action used with HTTP GET method. So there's nothing to do.
+    
+    2. __POST Requests (form posts):__
+    If you want to use Ext Direct with form posts (formHandler actions) you have to add the authenticity token to the base params of your EXT JS panel:
+    
+            var my_panel = Ext.create('Ext.form.Panel', {
+	        baseParams: {
+             <%= request_forgery_protection_token %>: '<%= form_authenticity_token %>'
+            },
+            // other config
+	        title: 'My Panel',
+	        border: false,
+            ...
+
+
+        [Here's](https://github.com/skeller1/extr/blob/master/test/dummy/app/views/projects/rpcextjs410.html.erb#L27) an example using request protect_from_forgery in an Rails dummy application included in this gem. 
+        Any help for adding form_authenticity_token to each form post by default would be nice!!!!
+
+
+
 ## Additional Features
 
-
 ### Use different names for controller names
-By using 3rd Party Ext Js scripts (or other circumstances) it would be nice using other controller names in your Rails app. So you can use 3rd party JS Files without any changes using the `name:` key in your yaml config:
+By using 3rd Party ExtJS scripts (or other circumstances) it would be nice using other controller names in your Rails app. So you can use 3rd party ExtJS Files without any changes using the `name:` key in your yaml config:
 
         ProjectsController:
           name: MyCustomController
@@ -160,11 +182,16 @@ By using 3rd Party Ext Js scripts (or other circumstances) it would be nice usin
         ...
 
 
-It's now possible to use this Ext Direct controller name in your JS scripts:
+It's now possible to use this Ext.Direct controller name in your scripts:
 
     Rails.SuperApplicationController.action1(current_project,function(result,e){
      alert(result);
     })
+
+##TODO
+    
+*Defining providers for different namespaces in yaml config file
+*Find a way to add authenticity token to each form post component by default (Is it possible???)
 
 ## License
 Extr is released under the [MIT License](http://www.opensource.org/licenses/MIT).
