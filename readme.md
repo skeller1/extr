@@ -65,7 +65,7 @@ Ready to start
           <title>Extr</title>
           <%= csrf_meta_tags %>
           <!-- Previous IMPORT OF JS and CSS FILES for ExtJS and Ext.Direct -->
-          <%= ext_direct_provider "Rails" %>
+          <%= ext_direct_provider %>
          </head>
          <body>
           <%= yield %>
@@ -73,28 +73,30 @@ Ready to start
         </html>
 
 
-    In your `application layout file` you have to use the `ext_direct_provider` helper that generates the Ext.Direct API Remote Provider Configuration with a specified namespace ( e.g. `Rails`)
+    In your `application layout file` you have to use the `ext_direct_provider` helper that generates the Ext.Direct API Remote Provider Configuration for all your specified namespaces( e.g. `App`)
 
 
 2.  __Register your directable controller actions__
 
     Define your controller configuration in one configuration file (`config/extdirect.yml`):
 
-        ProjectsController:
-         methods:   #all actions for GET Requests
-          getChildProject: 3
-          getParentProject: 1
-         formHandler: #all actions for FORM POST Requests
-          getUpload: 0
-        ApplicationController:
-         methods:
-          action1: 3
-          action2: 1
-         formHandler:
-          action3: 2
-          action4: 1
-        Admin_RegistrationController:
-         methods:
+        Rails:
+         ProjectsController:
+          methods:   #all actions for GET Requests
+           getChildProject: 3
+           getParentProject: 1
+          formHandler: #all actions for FORM POST Requests
+           getUpload: 0
+         ApplicationController:
+          methods:
+           action1: 3
+           action2: 1
+          formHandler:
+           action3: 2
+           action4: 1
+        Testnamespace:
+         Admin_RegistrationController:
+          methods:
             ...
 
         ...
@@ -170,15 +172,16 @@ Ready to start
 ### Use other name for controller
 By using 3rd Party ExtJS scripts (or other circumstances) it would be nice using other controller names in your Rails app. So you can use 3rd party ExtJS Files without any changes using the `name:` key in your yaml config:
 
-        ProjectsController:
+	Rails:        
+	 ProjectsController:
           name: MyCustomController
           methods:
-            getChildProject: 2
-            getOtherProject: 3
-        ApplicationController:
+           getChildProject: 2
+           getOtherProject: 3
+         ApplicationController:
           methods:
-            action1: 1
-            action2: 3
+           action1: 1
+           action2: 3
           name: SuperApplicationController
         ...
 
@@ -190,8 +193,6 @@ It's now possible to use this Ext.Direct controller name in your scripts:
     })
 
 ##TODO
-    
-* Configure different namespaces in yaml config file
 * Find a way to add authenticity token to each form post component by default (Is it possible???)
 
 ## License

@@ -5,34 +5,30 @@ module Extr
     "<base href=\"#{base}\" />".html_safe
   end
 
-  def ext_direct_provider(namespace = "App")
-  p Extr::Config.controller_config
-   config = {
+  def ext_direct_provider
+   p Extr::Config.controller_path.first.inspect
+   namespaced_apis=""
+   Extr::Config.controller_config.each do |namespace,extr_config|
+    config = {
       'url'       =>   Extr::Config::ROUTER_PATH,
       'type'      =>   'remoting',
-      'actions'   =>   Extr::Config.controller_config,
+      'actions'   =>   Extr::Config.controller_config[namespace],
       'namespace' =>   namespace,
       'srv_env'   =>   Rails.env
-   }
-   api="REMOTING_API = #{config.to_json}"
-
+    }
+    api="REMOTING_API_#{namespace.upcase} = #{config.to_json}"
+    namespaced_apis+="Ext.Direct.addProvider(#{api});"
+   
+   end
+    
    forgery = "(function() {
   Ext.Ajax.defaultHeaders = {
     'X-CSRF-Token': '#{form_authenticity_token}'
   };
 
-  //var originalGetCallData = Ext.direct.RemotingProvider.prototype.getCallData;
-  //Ext.override(Ext.direct.RemotingProvider, {
-  // getCallData: function(t) {
-  //  var defaults = originalGetCallData.apply(this, arguments);
-  //  return Ext.apply(defaults, {
-  //   #{request_forgery_protection_token}: '#{form_authenticity_token}'
-  //  });
-  // }
-  //})
   })();"
 
-   javascript_tag forgery+"Ext.Direct.addProvider(#{api});"
+   javascript_tag forgery+namespaced_apis
   end
 
   private

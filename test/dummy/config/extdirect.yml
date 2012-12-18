@@ -1,20 +1,29 @@
-ProjectsController:
- methods:
-  getChildProject: 2
- formHandler:
-  upload: 0
-ApplicationController:
- methods:
-  action1: 1
-  action2: 2
- formHandler:
-  action3: 2
-ProfilsController:
- name: Profil
- methods:
-  getBasicInfo: 1
-  getPhoneInfo: 1
-  getLocationInfo: 1
- formHandler:
-  updateBasicInfo: 0
-
+Rails:
+ ProjectsController:
+  methods:
+   getChildProject: 2
+  formHandler:
+   upload: 0
+ ApplicationController:
+  methods:
+   action1: 1
+   action2: 2
+  formHandler:
+   action3: 2
+ ProfilsController:
+  name: Profil
+  methods:
+   getBasicInfo: 1
+   getPhoneInfo: 1
+   getLocationInfo: 1
+  formHandler:
+   updateBasicInfo: 0
+Test:
+ ProfilsController:
+  name: Profil
+  methods:
+   getBasicInfo: 1
+   getPhoneInfo: 1
+   getLocationInfo: 1
+  formHandler:
+   updateBasicInfo: 0
