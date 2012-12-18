@@ -6,7 +6,6 @@ module Extr
   end
 
   def ext_direct_provider
-   p Extr::Config.controller_path.first.inspect
    namespaced_apis=""
    Extr::Config.controller_config.each do |namespace,extr_config|
     config = {
