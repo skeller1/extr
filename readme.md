@@ -73,7 +73,7 @@ Ready to start
         </html>
 
 
-    In your `application layout file` you have to use the `ext_direct_provider` helper that generates the Ext.Direct API Remote Provider Configuration for all your specified namespaces( e.g. `App`)
+    In your `application layout file` you have to use the `ext_direct_provider` helper that generates the Ext.Direct API Remote Provider Configuration for all your specified namespaces ( e.g. `App`)
 
 
 2.  __Register your directable controller actions__
