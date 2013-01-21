@@ -5,7 +5,7 @@ module Extr
 
      yaml_path = Rails.root.join("config", "extdirect.yml")
      if File.exists? yaml_path
-      p YAML.load_file(yaml_path).inspect
+      YAML.load_file(yaml_path).inspect
       YAML.load_file(yaml_path).each do |ns, klasses|
        klasses.each do |klass,options|
 	action = options["name"] || klass.gsub("_","")
