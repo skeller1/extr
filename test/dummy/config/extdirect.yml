@@ -27,3 +27,12 @@ Test:
    getLocationInfo: 1
   formHandler:
    updateBasicInfo: 0
+Mike:
+ ProfilsController:
+  name: Profil
+  methods:
+   getBasicInfo: 1
+   getPhoneInfo: 1
+   getLocationInfo: 1
+  formHandler:
+   updateBasicInfo: 0

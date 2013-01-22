@@ -14,11 +14,6 @@ module Extr
       def controller_path
         @@controller_path ||= {}
       end
-
-      def get_controller_path(action)
-        controller_path[action]
-      end
-
     end
   end
 end

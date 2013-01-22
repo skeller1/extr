@@ -42,7 +42,7 @@ module Extr
 
    begin
 
-    controller_klass = Config.get_controller_path(self.action).constantize
+    controller_klass = Config.controller_path[self.action].constantize
 
     unless controller_klass.mimes_for_respond_to.key?(Mime::JSON.symbol)
      raise "For supporting the rails way define at least respond_to :json in that controller: #{controller_klass}"
