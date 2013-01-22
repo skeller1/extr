@@ -192,6 +192,12 @@ It's now possible to use this Ext.Direct controller name in your scripts:
      alert(result);
     })
 
+### Rake Task
+
+  rake app:routes:extr
+
+This rake task allows you to control your extr config defined in `config/extdirect.yml`
+
 ## TODO
 * Find a way to add authenticity token to each form post component by default (Is it possible???)
 
