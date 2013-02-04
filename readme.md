@@ -194,7 +194,8 @@ It's now possible to use this Ext.Direct controller name in your scripts:
 
 ### Rake Task
 
-  rake app:routes:extr
+  	rake app:routes:extr
+  	rake routes:extr
 
 This rake task allows you to control your extr config defined in `config/extdirect.yml`
 
