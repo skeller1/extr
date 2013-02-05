@@ -74,27 +74,24 @@ Ready to start
 
 2.  __Register your directable controller actions__
 
-    There is one way to define directable controller actions:
-
-    1. Define all controller configurations in a configuration file (`config/extdirect.yml`):
-
-        ProjectsController:
+    Define all your ExtJS controller actions in one configuration file (`config/extdirect.yml`):
+    
+        Rails: #namespace
+         ProjectsController:
           methods:
-            getChildProject: 3
-            getParentProject: 1
+           getChildProject: 3
+           getParentProject: 1
           formHandler:
-            getUpload: 1
-        ApplicationController:
+           getUpload: 1
+         ApplicationController:
           methods:
-            action1: 3
-            action2: 1
-        Admin_RegistrationController:
+           action1: 3
+           action2: 1
+         Admin_RegistrationController:
           methods:
-            ...
+          ... 
 
-        ...
-
-        Namespaced controllers must be written with an underscore (e.g. `Admin_RegistrationController`)
+    Namespaced controllers must be written with an underscore (e.g. `Admin_RegistrationController`)
 
 
 3. __Set Response format for the controller__
@@ -157,7 +154,8 @@ By using 3rd Party Ext Js scripts (or other circumstances) it would be nice usin
         ...
 
 
-    It's now possible to use this Ext Direct controller name in your JS scripts:
+
+It's now possible to use this Ext Direct controller name in your JS scripts:
 
         Rails.SuperApplicationController.action1(current_project,function(result,e){
          alert(result);
