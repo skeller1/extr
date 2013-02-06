@@ -1,4 +1,10 @@
 module Extr
+ # Extr::RouterController is a standard Rails Action Controller that receives all incoming ExtJS requests
+ # (included validation of the transaction) and delegate them to the specified controller actions inside your Rails application.
+ #
+ #
+ #
+ #
  class RouterController < ActionController::Base
 
   protect_from_forgery
@@ -28,23 +34,13 @@ module Extr
   def collect_transactions
    arr = []
    raw_http_params.each do |p|
-    if request.form_data?
-      t = Transaction.new(request,
-                          p[:extAction],
-                          p[:extMethod],
-                          p[:extTID],
+     t = Transaction.new(request,
+                          p[:extAction] || p[:action],
+                          p[:extMethod] || p[:method],
+                          p[:extTID] || p[:tid],
                           p[:data],
-                          p[:extUpload]
-      )
-    else
-      t = Transaction.new(request,
-                          p[:action],
-                          p[:method],
-                          p[:tid],
-                          p[:data],
-                          false
-      )
-    end
+                          p[:extUpload] || false
+     )
     arr << t if t.valid?
    end
    return arr
