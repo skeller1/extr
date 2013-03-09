@@ -1,7 +1,7 @@
 [![Dependency Status](https://gemnasium.com/skeller1/extr.png)](https://gemnasium.com/skeller1/extr)
 [![Maintenance Status](http://stillmaintained.com/skeller1/extr.png)](http://stillmaintained.com/skeller1/extr)
 [![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/skeller1/extr)
-
+[![endorse](http://api.coderwall.com/skeller1/endorsecount.png)](http://coderwall.com/skeller1)
 # __ExtR__
 
 
