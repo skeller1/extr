@@ -7,13 +7,12 @@ module Extr
     cattr_accessor :controller_path
 
     class << self
-      def controller_config
-        @@controller_config ||= Hash.new { |hash, key| hash[key] = {} }
+
+      def initialize!
+        @@controller_config = Hash.new { |hash, key| hash[key] = {} }
+        @@controller_path = {}
       end
 
-      def controller_path
-        @@controller_path ||= {}
-      end
     end
   end
 end
