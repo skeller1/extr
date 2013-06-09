@@ -1,7 +1,7 @@
 module Extr
   class Config
 
-    ROUTER_PATH = 'extr/direct_router'.freeze
+    ROUTER_PATH = '/extr/direct_router'.freeze
 
     cattr_accessor :controller_config
     cattr_accessor :controller_path
