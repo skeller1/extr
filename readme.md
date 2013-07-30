@@ -7,7 +7,7 @@
 
 __An open source Ruby on Rails 3.x engine for using Ext.Direct in Rails Applications.__
 
-ExtR is an Rails 3.x compatible implementation of the [Ext.Direct API specification](http://www.sencha.com/products/extjs/extdirect) from the famous [Sencha ExtJS Framework](http://www.sencha.com/). If you want to write ExtJS UI's with the power of Ruby have a look at [Netzke](http://netzke.org/), the brilliant Sencha ExtJS and Ruby on Rails component framework.
+ExtR is an Rails 4.x and 3.x compatible implementation of the [Ext.Direct API specification](http://www.sencha.com/products/extjs/extdirect) from the famous [Sencha ExtJS Framework](http://www.sencha.com/). If you want to write ExtJS UI's with the power of Ruby have a look at [Netzke](http://netzke.org/), the brilliant Sencha ExtJS and Ruby on Rails component framework.
 
 
 ## Intension
