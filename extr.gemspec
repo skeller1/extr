@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.email       = ["MiStK@gmx.de"]
   s.homepage    = "http://github.com/skeller1/extr/"
   s.summary     = "Extr is a Ext Direct Implementation for Rails 3.x"
-  s.description = "Extr is a Rails 3.x Ext Direct Router with View Helpers and some adjustment abilities."
+  s.description = "ExtR is an Rails 4.x and Rails 3.x Ext Direct Router with View Helpers and some adjustment abilities."
 
   s.files = Dir["{app,config,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "readme.md"]
   s.test_files = Dir["test/**/*"]
