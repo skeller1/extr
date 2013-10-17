@@ -35,7 +35,7 @@ ExtJS call with Ext.Direct API
 
 ## Requirements
 * ExtJS
-* [Rails 3.x](http://github.com/rails/rails)
+* [Rails 3.x/4.x](http://github.com/rails/rails)
 
 
 ## Install
