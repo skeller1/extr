@@ -33,7 +33,7 @@ module Extr
   def invoke_controller_method
 
    ext = {
-    :type: 'rpc',
+    type: 'rpc',
     tid: self.tid,
     action: self.action,
     method: self.method,
