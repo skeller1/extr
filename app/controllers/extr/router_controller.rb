@@ -15,9 +15,9 @@ module Extr
    body = transactions.map(&:response)
 
    if request.form_data? and extjs_form_with_upload?
-    render :inline => "<html><body><textarea>#{body.to_json}</textarea></body></html>", :content_type => 'text/html'
+    render inline: "<html><body><textarea>#{body.to_json}</textarea></body></html>", content_type: 'text/html'
    else
-    render :json => body ||= ""
+    render json: body ||= ""
    end
   end
 
@@ -61,14 +61,14 @@ module Extr
    body = []
    transactions.each do |t|
     body << {
-      'type'    => 'exception',
-      'tid'     => t.tid,
-      'action'  => t.action,
-      'method'  => t.method,
-      'result'  => "WARNING: Can't verify CSRF token authenticity"
+      type: 'exception',
+      tid: t.tid,
+      action: t.action,
+      method: t.method,
+      result: "WARNING: Can't verify CSRF token authenticity"
     }
    end
-   render :json => body
+   render json: body
 
   end
 
