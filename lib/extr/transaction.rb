@@ -4,9 +4,9 @@ module Extr
 
   include ActiveModel::Validations
 
-  validates :action, :presence => true
-  validates :method, :presence => true
-  validates :tid, :presence => true, :numericality => {:greater_than => 0}
+  validates :action, presence: true
+  validates :method, presence: true
+  validates :tid, presence: true, numericality: {greater_than: 0}
 
   attr_reader :request, :action, :method, :data, :tid, :upload
 
@@ -33,11 +33,11 @@ module Extr
   def invoke_controller_method
 
    ext = {
-    'type'    => 'rpc',
-    'tid'     => self.tid,
-    'action'  => self.action,
-    'method'  => self.method,
-    'result'  => ""
+    :type: 'rpc',
+    tid: self.tid,
+    action: self.action,
+    method: self.method,
+    result: ""
    }
 
    begin
