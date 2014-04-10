@@ -12,7 +12,9 @@ ExtR is an Ruby on Rails 4.x and Ruby on Rails 3.x compatible implementation of 
 
 ## Intension
 
-The Ext.Direct API allows you to call serverside methods within the client side (Javascript). This makes the development of complex UI's' easier and more efficient. Have a look:
+The Ext.Direct API allows you to call serverside methods within the client side (Javascript). This makes the development of complex UI's' easier and more efficient. Each Ext Direct Action is routed to the specified Rails controller action.
+
+Have a look:
 
 
 Normal Ajax call with JQuery
