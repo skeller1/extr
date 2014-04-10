@@ -1,7 +1,7 @@
 ## 1.0.5 [April 10 2014]
 
 * update code for ruby syntax changes (new hash style)
-* changed router definition to new Rails 4.x Syntax
+* changed router definition to new Rails 4.x syntax
 
 ## 1.0.4 [June 9 2013]
 
