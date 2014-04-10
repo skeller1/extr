@@ -1,3 +1,7 @@
+## 1.0.5 [April 10 2014]
+
+* update code for ruby syntax changes (new hash style)
+
 ## 1.0.4 [June 9 2013]
 
 * Fixing relative extr router path
