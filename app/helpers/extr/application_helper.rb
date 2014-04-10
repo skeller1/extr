@@ -9,11 +9,11 @@ module Extr
    namespaced_apis=""
    Extr::Config.controller_config.each do |namespace,extr_config|
     config = {
-      'url'       =>   Extr::Config::ROUTER_PATH,
-      'type'      =>   'remoting',
-      'actions'   =>   Extr::Config.controller_config[namespace],
-      'namespace' =>   namespace,
-      'srv_env'   =>   Rails.env
+      url:  Extr::Config::ROUTER_PATH,
+      type: 'remoting',
+      actions: Extr::Config.controller_config[namespace],
+      namespace: namespace,
+      srv_env: Rails.env
     }
     api="REMOTING_API_#{namespace.upcase} = #{config.to_json}"
     namespaced_apis+="Ext.Direct.addProvider(#{api});"
