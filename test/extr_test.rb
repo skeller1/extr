@@ -1,10 +1,10 @@
 require 'test_helper'
 
 class ExtrTest < ActiveSupport::TestCase
-
+=begin
   #include Rack::Test::Methods
 
-  def call_rails(env_params={})
+  #def call_rails(env_params={})
 
    @request = ActionDispatch::TestRequest.new(env_params)
    @request['REQUEST_METHOD'] = "POST"
@@ -30,8 +30,8 @@ class ExtrTest < ActiveSupport::TestCase
     test_body = '{"bar":"foo"}'
     callback = 'foo'
     app = lambda { |env| [200, {'Content-Type' => 'application/json'}, [test_body]] }
-    body = Extr::Router.new(app, Extr::Config::ROUTER_PATH).call(@request).to_a
-    p body
+    #body = Extr::Router.new(app, Extr::Config::ROUTER_PATH).call(@request).to_a
+    #p body
     #p body #body.should.equal ["#{callback}(#{test_body})"]
     #call_rails
     #assert_equal 404, @response.first
@@ -46,6 +46,7 @@ class ExtrTest < ActiveSupport::TestCase
     #assert_response 404
   end
 
+=end
 
 end
 

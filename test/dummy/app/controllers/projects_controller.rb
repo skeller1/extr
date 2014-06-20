@@ -15,8 +15,9 @@ class ProjectsController < ApplicationController
   end
 
   def index
-    @projects = Project.all
-    respond_with @projects
+	render :text => "est"
+    #@projects = Project.all
+    r#espond_with @projects
   end
 
   # GET /projects/1

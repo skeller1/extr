@@ -10,18 +10,16 @@ Gem::Specification.new do |s|
   s.authors     = ["Stephan Keller"]
   s.email       = ["MiStK@gmx.de"]
   s.homepage    = "http://github.com/skeller1/extr/"
-  s.summary     = "Extr is a Ext Direct Implementation for Rails 3.x"
-  s.description = "ExtR is an Rails 4.x and Rails 3.x Ext Direct Router with View Helpers and some adjustment abilities."
+  s.summary     = "Extr is a Ext Direct Implementation for Rails 4.x"
+  s.description = "ExtR is an Rails 4.x Ext Direct Router with View Helpers and some adjustment abilities."
 
   s.files = Dir["{app,config,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "readme.md"]
   s.test_files = Dir["test/**/*"]
 
-  s.add_dependency "rails", "> 3.0"
+  s.required_ruby_version = '>= 1.9.3'
 
-  # s.add_dependency "jquery-rails"
-
-  s.add_development_dependency "sqlite3"
-  #s.add_development_dependency 'test-spec', '>= 0.9.0'
-  #s.add_development_dependency 'json', '>= 1.1'
+  s.add_dependency 'rails', '>= 4.0'
+  
+  s.add_development_dependency 'sqlite3'
 end
 
